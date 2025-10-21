@@ -1,8 +1,9 @@
-# Netlify Build Fix - URGENT
+# Netlify Deployment Fix - URGENT
 
-## 🚨 Root Cause
+## 🚨 Issues Fixed
 
-The Netlify build failure was caused by an **orphaned object literal** in `src/utils/financial-utils.ts` at line 128:
+### Issue 1: Build Failure (FIXED ✅)
+The Netlify build was failing due to an **orphaned object literal** in `src/utils/financial-utils.ts` at line 128:
 
 ```typescript
 // Lines 128-134 (REMOVED - syntax error)
@@ -20,12 +21,31 @@ This was leftover code from a removed `console.log` statement, causing:
 Error: Expected ';', '}' or <eof>
 ```
 
-## ✅ Solution Applied
+### Issue 2: Preview Shows "URL Not Found" (FIXED ✅)
+The preview deployed successfully but showed **404/Not Found** because:
+
+**Problem in `netlify.toml`:**
+```toml
+publish = ".next"  # ❌ Wrong - trying to serve build output as static files
+NETLIFY_NEXT_PLUGIN_SKIP = "true"  # ❌ Disabled Next.js runtime support
+```
+
+**Why this caused 404:**
+- `.next` is the build output directory, not meant to be served directly
+- Next.js needs its runtime to handle routing, server components, and API routes
+- Without the plugin, Netlify tried to serve `.next` as static HTML files
+
+## ✅ Solutions Applied
 
 All fixes are on branch: **`claude/init-claude-flow-011CUKbEWZqVsdhVMkMzna1J`**
 
-### Primary Fix
+### Fix 1: Syntax Error (Build)
 - **Removed orphaned object literal** (lines 128-134) in `financial-utils.ts`
+
+### Fix 2: Deployment Configuration (404)
+- **Removed `publish = ".next"`** - Let Netlify Next.js plugin handle serving
+- **Removed `NETLIFY_NEXT_PLUGIN_SKIP`** - Enable proper Next.js support
+- Netlify will now correctly serve the Next.js application with full runtime
 
 ### Additional Critical Fixes (Also in this branch)
 1. Fixed syntax errors in `dashboard/page.tsx` (incomplete imports)
@@ -116,11 +136,13 @@ See `.env.example` for complete list and descriptions.
 
 ## 📝 Commits Included in Fix
 
-1. `6a982dd` - Add comprehensive build fixes documentation
-2. `3d85935` - Fix critical build errors - TypeScript compilation now succeeds
-3. `9b9ccaa` - Run comprehensive pre-deployment audit
-4. `51c08ed` - Set up Jest testing framework
-5. `36a307c` - Integrate rate limiting across all API endpoints
+1. `5e3cba8` - **Fix Netlify deployment: enable Next.js plugin** (404 fix)
+2. `b09affe` - Add Netlify build fix guide
+3. `6a982dd` - Add comprehensive build fixes documentation
+4. `3d85935` - Fix critical build errors - TypeScript compilation now succeeds
+5. `9b9ccaa` - Run comprehensive pre-deployment audit
+6. `51c08ed` - Set up Jest testing framework
+7. `36a307c` - Integrate rate limiting across all API endpoints
 
 ## 🔍 Verification Steps
 
