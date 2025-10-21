@@ -1,14 +1,16 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Wallet } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Wallet } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
 
 // Form schema for balance update
 const formSchema = z.object({
@@ -42,7 +44,7 @@ export default function UpdateBalanceForm({ onUpdate, initialBalance = 0 }: Upda
       const amount = parseFloat(data.balance);
       await onUpdate(amount);
       form.reset({ balance: amount.toString() });
-    } catch (error) {
+    } catch (_error) {
     } finally {
       setIsSubmitting(false);
     }

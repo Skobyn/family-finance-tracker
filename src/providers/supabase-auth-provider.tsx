@@ -1,8 +1,9 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useSupabaseAuth } from '@/hooks/use-supabase';
 import { Session } from '@supabase/supabase-js';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+
+import { useSupabaseAuth } from '@/hooks/use-supabase';
 
 interface AuthContextType {
   session: Session | null;

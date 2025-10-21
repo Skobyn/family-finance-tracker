@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase-client';
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { useState, useEffect } from 'react';
+
+import { supabase } from '@/lib/supabase-client';
 
 export function useSupabaseAuth() {
   const [session, setSession] = useState<Session | null>(null);
@@ -48,7 +49,7 @@ export function useSupabaseAuth() {
       }
       
       setUser(data);
-    } catch (error) {
+    } catch (_error) {
     }
   }
 
@@ -59,7 +60,7 @@ export function useSupabaseAuth() {
         password,
       });
       if (error) throw error;
-    } catch (error) {
+    } catch (_error) {
       throw error;
     }
   }
@@ -89,7 +90,7 @@ export function useSupabaseAuth() {
         
         if (profileError) throw profileError;
       }
-    } catch (error) {
+    } catch (_error) {
       throw error;
     }
   }
@@ -98,7 +99,7 @@ export function useSupabaseAuth() {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-    } catch (error) {
+    } catch (_error) {
       throw error;
     }
   }

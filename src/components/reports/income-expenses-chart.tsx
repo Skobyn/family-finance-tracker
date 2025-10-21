@@ -1,5 +1,6 @@
 "use client";
 
+import { startOfMonth, endOfMonth, eachMonthOfInterval } from "date-fns";
 import { useMemo } from "react";
 import {
   BarChart,
@@ -12,9 +13,9 @@ import {
   ResponsiveContainer,
   ReferenceLine
 } from "recharts";
-import { formatCurrency } from '@/utils/financial-utils';
+
 import { Income, Bill, Expense } from "@/types/financial";
-import { startOfMonth, endOfMonth, eachMonthOfInterval } from "date-fns";
+import { formatCurrency } from '@/utils/financial-utils';
 
 interface IncomeExpensesChartProps {
   incomes: Income[];

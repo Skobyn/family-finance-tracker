@@ -1,9 +1,12 @@
 "use client";
 
+import { CircleDollarSign } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
 import { MainNav } from "@/components/layout/main-nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +15,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CircleDollarSign } from "lucide-react";
 import { useAuth } from "@/providers/firebase-auth-provider";
-import { toast } from "sonner";
+
 
 export function Header() {
   const { user, signOut, updateUserInfo } = useAuth();
@@ -34,7 +36,7 @@ export function Header() {
   const handleSignOut = async () => {
     try {
       await signOut();
-    } catch (error) {
+    } catch (_error) {
     }
   };
 

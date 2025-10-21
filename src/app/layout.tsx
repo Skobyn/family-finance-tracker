@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
+
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/providers/firebase-auth-provider";
 
 // Configure Inter font

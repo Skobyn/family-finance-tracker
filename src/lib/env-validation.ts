@@ -132,21 +132,21 @@ export function validateEnvironment(): EnvironmentConfig {
   // Validate Firebase config
   try {
     firebase = validateFirebaseConfig();
-  } catch (error) {
+  } catch (_error) {
     errors.push(`Firebase: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   // Validate Plaid config
   try {
     plaid = validatePlaidConfig();
-  } catch (error) {
+  } catch (_error) {
     errors.push(`Plaid: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   // Validate Supabase config
   try {
     supabase = validateSupabaseConfig();
-  } catch (error) {
+  } catch (_error) {
     errors.push(`Supabase: ${error instanceof Error ? error.message : String(error)}`);
   }
 
@@ -173,7 +173,7 @@ export function validateEnvironment(): EnvironmentConfig {
 export function validateFirebaseEnvironment() {
   try {
     return validateFirebaseConfig();
-  } catch (error) {
+  } catch (_error) {
     throw new Error(
       `Firebase environment validation failed:\n` +
       `${error instanceof Error ? error.message : String(error)}`
@@ -187,7 +187,7 @@ export function validateFirebaseEnvironment() {
 export function validatePlaidEnvironment() {
   try {
     return validatePlaidConfig();
-  } catch (error) {
+  } catch (_error) {
     throw new Error(
       `Plaid environment validation failed:\n` +
       `${error instanceof Error ? error.message : String(error)}`
@@ -201,7 +201,7 @@ export function validatePlaidEnvironment() {
 export function validateSupabaseEnvironment() {
   try {
     return validateSupabaseConfig();
-  } catch (error) {
+  } catch (_error) {
     throw new Error(
       `Supabase environment validation failed:\n` +
       `${error instanceof Error ? error.message : String(error)}`
@@ -223,19 +223,19 @@ export function checkEnvironment(): {
 
   try {
     validateFirebaseConfig();
-  } catch (error) {
+  } catch (_error) {
     errors.push(`Firebase: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   try {
     validatePlaidConfig();
-  } catch (error) {
+  } catch (_error) {
     errors.push(`Plaid: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   try {
     validateSupabaseConfig();
-  } catch (error) {
+  } catch (_error) {
     errors.push(`Supabase: ${error instanceof Error ? error.message : String(error)}`);
   }
 

@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { usePlaidLink, PlaidLinkOnSuccessMetadata } from 'react-plaid-link';
 import { toast } from 'sonner';
+
 import { useAuth } from '@/providers/firebase-auth-provider';
 
 interface UsePlaidLinkProps {
@@ -41,7 +42,7 @@ export function usePlaidLinkFlow({ onSuccess, onExit }: UsePlaidLinkProps = {}) 
       }
 
       setLinkToken(data.linkToken);
-    } catch (err) {
+    } catch (_err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
       toast.error('Failed to connect to financial services');
     } finally {
@@ -95,7 +96,7 @@ export function usePlaidLinkFlow({ onSuccess, onExit }: UsePlaidLinkProps = {}) 
       }
 
       toast.success('Account successfully connected!');
-    } catch (err) {
+    } catch (_err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
       toast.error('Failed to link account');
     }

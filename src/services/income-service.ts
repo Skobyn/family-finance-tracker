@@ -3,8 +3,6 @@
  * Handles all income-related operations
  */
 
-import { db } from '@/lib/firebase-client';
-import { Income } from '@/types/financial';
 import {
   collection,
   doc,
@@ -18,6 +16,10 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
+import { Income } from '@/types/financial';
+
 import { calculateNextPaymentDate } from './utils/date-utils';
 
 /**
@@ -39,7 +41,7 @@ export const addIncome = async (
     // Always use the user-specific path for new incomes
     const docRef = await addDoc(collection(db, `users/${userId}/incomes`), newIncome);
     return { id: docRef.id, ...newIncome };
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -67,7 +69,7 @@ export const updateIncome = async (
     };
 
     await updateDoc(incomeRef, updatedData);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -86,7 +88,7 @@ export const deleteIncome = async (id: string, userId: string): Promise<void> =>
     }
 
     await deleteDoc(incomeRef);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -130,7 +132,7 @@ export const getIncomes = async (userId: string): Promise<Income[]> => {
 
       return fallbackResults;
     }
-  } catch (error) {
+  } catch (_error) {
 
     // Return empty array rather than throwing
     return [];
@@ -172,7 +174,7 @@ export const addIncomeRecord = async (
       id: docRef.id,
       ...newIncome
     };
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };

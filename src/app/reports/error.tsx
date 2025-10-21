@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
-import { Button } from '@/components/ui/button'
 import { AlertCircle } from 'lucide-react'
+import { useEffect } from 'react'
+
+import { Button } from '@/components/ui/button'
 
 export default function ReportsError({
   error,
@@ -13,6 +14,7 @@ export default function ReportsError({
 }) {
   useEffect(() => {
     // Log error details for future logging service integration
+    // eslint-disable-next-line no-console
     console.error('Reports error:', {
       message: error.message,
       digest: error.digest,

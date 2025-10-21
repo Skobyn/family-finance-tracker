@@ -1,19 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building, Lock, FileQuestion, CreditCard, Shield, AlertCircle } from "lucide-react";
-import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useState } from "react";
+
+import { MainLayout } from "@/components/layout/main-layout";
 import { Badge } from "@/components/ui/badge";
-import { PlaidLinkButton } from "./plaid-link-button";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/providers/firebase-auth-provider";
+
+import { PlaidLinkButton } from "./plaid-link-button";
 
 // Mock connected accounts for UI demonstration
 type ConnectedAccount = {

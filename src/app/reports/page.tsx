@@ -1,64 +1,32 @@
 "use client";
 
-import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
-import { 
-  Download, 
-  PieChart, 
-  BarChart3, 
-  LineChart as LineChartIcon, 
-  TrendingUp, 
-  TrendingDown, 
-  DollarSign, 
-  Calendar, 
-  Share2,
+
+import {
+  Download,
   Filter,
-  FileDown,
-  FileText,
-  Table,
-  Settings,
-  AlertTriangle,
-  Save,
-  Plus,
-  Sliders,
-  FileType
+  Plus
 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { IncomeExpensesChart } from "@/components/reports/income-expenses-chart";
-import { CategoryPieChart } from "@/components/reports/category-pie-chart";
-import { SpendingTrendsChart } from "@/components/reports/spending-trends-chart";
 import { useRouter } from "next/navigation";
-import { useAuth } from '@/providers/firebase-auth-provider';
-import { useBudgets, useIncomes, useBills, useExpenses } from '@/hooks/use-financial-data';
-import { format, subMonths, startOfMonth, endOfMonth, parseISO } from "date-fns";
-import { DateRangePicker } from "@/components/ui/date-range-picker";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
-import { formatCurrency } from '@/utils/financial-utils';
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
+
+import { MainLayout } from "@/components/layout/main-layout";
+import { CategoryPieChart } from "@/components/reports/category-pie-chart";
 import { CategorySpendingWidget } from "@/components/reports/category-spending-widget";
-import { useFinancialData } from "@/hooks/use-financial-data";
+import { IncomeExpensesChart } from "@/components/reports/income-expenses-chart";
+import { SpendingTrendsChart } from "@/components/reports/spending-trends-chart";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { DateRangePicker } from "@/components/ui/date-range-picker";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useFinancialData } from "@/hooks/use-financial-data";
+import { useAuth } from '@/providers/firebase-auth-provider';
 
 // Define the report types for the UI
-type ReportType = "overview" | "income-vs-expenses" | "category-breakdown" | "spending-trends" | "transactions" | "budget-analysis" | "custom";
+type _ReportType = "overview" | "income-vs-expenses" | "category-breakdown" | "spending-trends" | "transactions" | "budget-analysis" | "custom";
 
 // Define custom report settings interface
-interface CustomReportSettings {
+interface _CustomReportSettings {
   title: string;
   description: string;
   includeSections: {
@@ -78,7 +46,7 @@ interface CustomReportSettings {
 }
 
 // Function to download reports as different formats
-const downloadReport = (type: 'csv' | 'pdf' | 'excel') => {
+const _downloadReport = (type: 'csv' | 'pdf' | 'excel') => {
   // This would be implemented with a proper export library
   toast.success(`Report downloaded as ${type.toUpperCase()}`);
 };

@@ -1,13 +1,15 @@
 "use client";
 
+import { addDoc, collection } from "firebase/firestore";
+import { LogIn } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+
 import { AuthDebug } from "@/components/auth/auth-debug";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/providers/firebase-auth-provider";
-import { LogIn } from "lucide-react";
 import { db } from "@/lib/firebase-client";
-import { addDoc, collection } from "firebase/firestore";
-import { toast } from "sonner";
+import { useAuth } from "@/providers/firebase-auth-provider";
+
 
 export default function AuthDebugPage() {
   const { signInWithGoogle, signOut, user } = useAuth();
@@ -52,12 +54,15 @@ export default function AuthDebugPage() {
         text: "Test data",
         timestamp: new Date().toISOString()
       };
-      
+
+      // eslint-disable-next-line no-console
       console.log("Attempting to write test data to Firestore:", testData);
       const docRef = await addDoc(collection(db, "test_writes"), testData);
+      // eslint-disable-next-line no-console
       console.log("Test write successful with document ID:", docRef.id);
       toast.success("Successfully wrote to Firestore!");
     } catch (err: any) {
+      // eslint-disable-next-line no-console
       console.error("Firestore test write failed:", err);
       toast.error(`Failed to write to Firestore: ${err.message}`);
       setError(err.message || "Failed to write to database");

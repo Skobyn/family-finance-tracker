@@ -1,14 +1,15 @@
 "use client";
 
+import { addMonths, format, startOfMonth } from "date-fns";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+
 import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CalendarHeatmap } from "@/components/visualizations/calendar-heatmap";
 import { useExpenses } from "@/hooks/use-financial-data";
-import { addMonths, format, startOfMonth } from "date-fns";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function CalendarPage() {
   const { expenses, loading } = useExpenses();

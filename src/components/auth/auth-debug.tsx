@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useAuth } from "@/providers/firebase-auth-provider";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useAuth } from "@/providers/firebase-auth-provider";
 
 export function AuthDebug() {
   const { user, loading } = useAuth();
@@ -26,6 +27,7 @@ export function AuthDebug() {
         alert("Copied to clipboard!");
       })
       .catch((err) => {
+      // eslint-disable-next-line no-console
         console.error("Failed to copy text: ", err);
       });
   };

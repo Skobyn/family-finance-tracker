@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { plaidClient } from '@/lib/plaid-client';
+
 import { getCurrentUser } from '@/lib/firebase-client';
+import { plaidClient } from '@/lib/plaid-client';
 import { getPlaidToken, storePlaidTransactions } from '@/lib/plaid-firebase';
 
 export async function POST(request: NextRequest) {

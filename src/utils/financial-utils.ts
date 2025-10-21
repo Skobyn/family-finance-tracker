@@ -13,7 +13,7 @@ export function calculateNextOccurrence(startDate: string, frequency: string): s
   }
 
   // Calculate the next occurrence based on frequency
-  let nextDate = new Date(date);
+  const nextDate = new Date(date);
   
   switch (frequency) {
     case 'daily':
@@ -124,15 +124,7 @@ export function generateCashFlowForecast(
     const validBills = Array.isArray(bills) ? bills.slice(0, 100) : [];
     const validExpenses = Array.isArray(expenses) ? expenses.slice(0, 100) : [];
     const validAdjustments = Array.isArray(balanceAdjustments) ? balanceAdjustments.slice(0, 50) : [];
-    
-      balance: normalizedBalance,
-      incomes: validIncomes.length,
-      bills: validBills.length,
-      expenses: validExpenses.length,
-      adjustments: validAdjustments.length,
-      days: normalizedDays
-    });
-    
+
     // Initialize forecast with current balance
     const forecast: ForecastItem[] = [{
       itemId: 'initial-balance',
@@ -147,9 +139,9 @@ export function generateCashFlowForecast(
     
     // Function to safely add items to forecast
     const safelyAddItems = (
-      items: any[], 
+      items: any[],
       processItem: (item: any) => ForecastItem | ForecastItem[] | null,
-      itemType: string
+      _itemType: string
     ) => {
       let processed = 0;
       
@@ -169,7 +161,7 @@ export function generateCashFlowForecast(
           if (processed > 1000) {
             break;
           }
-        } catch (error) {
+        } catch (_error) {
           // Skip this item and continue with others
         }
       }
@@ -350,7 +342,7 @@ export function generateCashFlowForecast(
     forecast.sort((a, b) => {
       try {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
-      } catch (error) {
+      } catch (_error) {
         return 0; // Default to equal if error parsing dates
       }
     });
@@ -375,7 +367,7 @@ export function generateCashFlowForecast(
     
     return trimmedForecast;
     
-  } catch (error) {
+  } catch (_error) {
     // Return minimal valid forecast with the current balance
     return [{
       itemId: 'initial-balance',

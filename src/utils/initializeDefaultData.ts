@@ -1,5 +1,6 @@
-import { db } from '@/lib/firebase-client';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
 
 /**
  * Creates a new household for a user
@@ -31,7 +32,7 @@ export async function createHouseholdForUser(userId: string, name: string = 'My 
     });
 
     return householdRef.id;
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -96,7 +97,7 @@ export async function createDefaultCategories(householdId: string): Promise<void
         updated_at: Timestamp.now()
       });
     }
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -146,7 +147,7 @@ export async function createDefaultAccounts(householdId: string): Promise<void> 
         updated_at: Timestamp.now()
       });
     }
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -167,7 +168,7 @@ export async function initializeUserData(userId: string, householdName?: string)
     // Create default accounts
     await createDefaultAccounts(householdId);
     
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 } 

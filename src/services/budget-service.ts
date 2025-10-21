@@ -3,8 +3,6 @@
  * Handles all budget-related operations
  */
 
-import { db } from '@/lib/firebase-client';
-import { Budget } from '@/types/financial';
 import {
   collection,
   doc,
@@ -16,6 +14,9 @@ import {
   query,
   orderBy,
 } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
+import { Budget } from '@/types/financial';
 
 /**
  * Add a new budget
@@ -32,7 +33,7 @@ export const addBudget = async (budget: any, userId: string): Promise<any> => {
 
     const docRef = await addDoc(collection(db, `users/${userId}/budgets`), newBudget);
     return { id: docRef.id, ...newBudget };
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -57,7 +58,7 @@ export const updateBudget = async (budget: any & { id: string }, userId: string)
     };
 
     await updateDoc(budgetRef, updatedData);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -76,7 +77,7 @@ export const deleteBudget = async (id: string, userId: string): Promise<void> =>
     }
 
     await deleteDoc(budgetRef);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -93,7 +94,7 @@ export const getBudgets = async (userId: string): Promise<any[]> => {
 
     const querySnapshot = await getDocs(budgetsQuery);
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  } catch (error) {
+  } catch (_error) {
     // Return empty array if collection doesn't exist yet
     if ((error as any)?.code === 'resource-exhausted') {
       return [];

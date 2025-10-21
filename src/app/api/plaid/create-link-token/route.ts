@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import { plaidClient } from '@/lib/plaid-client';
 import { CountryCode, Products } from 'plaid';
+
 import { getCurrentUser } from '@/lib/firebase-client';
+import { plaidClient } from '@/lib/plaid-client';
 
 export async function POST() {
   try {

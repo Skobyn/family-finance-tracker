@@ -1,27 +1,28 @@
 "use client";
 
+import { format } from "date-fns";
+import { Calendar as CalendarIcon, CheckCircle, HelpCircle, Database } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
+
+import { BulkBillsEditor } from "@/components/forms/bulk-bills-editor";
 import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Calendar } from "@/components/ui/calendar";
-import { Separator } from "@/components/ui/separator";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import { AlertCircle, Calendar as CalendarIcon, CheckCircle, ChevronRight, HelpCircle, Plus, Database } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
-import { useRouter } from "next/navigation";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { BulkBillsEditor } from "@/components/forms/bulk-bills-editor";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useExpenses } from "@/hooks/use-financial-data";
-import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+
 
 // Type definitions
 type BillFrequency = "weekly" | "monthly" | "quarterly" | "annual" | "one-time";
@@ -133,7 +134,7 @@ export default function BillsExpensesPage() {
       await addExpense(expenseData);
       toast.success('Expense saved successfully');
       router.push('/bills');
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to save expense. Please try again.");
     }
     
@@ -174,13 +175,13 @@ export default function BillsExpensesPage() {
       toast.success(`${items.length} expenses saved successfully`);
       setBulkEditorOpen(false);
       router.push('/bills'); // Navigate back to bills page
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to save all expenses. Please try again.");
     }
   };
   
   // Helper function to get weekly options
-  const getWeeklyOptions = () => {
+  const _getWeeklyOptions = () => {
     return [
       { value: "sunday", label: "Every Sunday" },
       { value: "monday", label: "Every Monday" },

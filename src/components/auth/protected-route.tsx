@@ -1,9 +1,10 @@
 'use client';
 
-import { ReactNode, useEffect } from 'react';
-import { useAuth } from '@/providers/firebase-auth-provider';
 import { useRouter } from 'next/navigation';
+import { ReactNode, useEffect } from 'react';
+
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
+import { useAuth } from '@/providers/firebase-auth-provider';
 
 interface ProtectedRouteProps {
   children: ReactNode;

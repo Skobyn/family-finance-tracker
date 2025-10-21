@@ -1,7 +1,8 @@
-import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
-import { getFirestore, Firestore } from 'firebase/firestore';
-import { getAuth, Auth, User, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { getAnalytics, isSupported, Analytics } from 'firebase/analytics';
+import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
+import { getAuth, Auth, User, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { getFirestore, Firestore } from 'firebase/firestore';
+
 import { validateFirebaseEnvironment } from './env-validation';
 
 // Validate Firebase environment variables before initialization
@@ -10,7 +11,7 @@ let firebaseConfig;
 try {
   const validatedConfig = validateFirebaseEnvironment();
   firebaseConfig = validatedConfig;
-} catch (error) {
+} catch (_error) {
   // Re-throw to prevent initialization with invalid config
   throw error;
 }
@@ -49,7 +50,7 @@ if (typeof window !== 'undefined') {
       .catch(() => {
         // Analytics initialization failed silently
       });
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 } else {
@@ -87,7 +88,7 @@ export const getUserProfile = async (userId: string) => {
       return userDoc.data();
     }
     return null;
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };

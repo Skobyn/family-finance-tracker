@@ -1,7 +1,11 @@
 "use client"
 
+import { Plus, Pencil, CalendarCheck } from "lucide-react";
 import { useState } from "react";
-import { Plus, Pencil, CheckCircle, CalendarCheck } from "lucide-react";
+
+import BillForm from "@/components/forms/bill-form";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,13 +28,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { Bill } from "@/types/financial";
 import { useBills } from "@/hooks/use-financial-data";
-import BillForm from "@/components/forms/bill-form";
+import { Bill } from "@/types/financial";
 import { formatCurrency, formatDate, isOverdue, daysUntil } from "@/utils/financial-utils";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 const FREQUENCY_LABEL: Record<string, string> = {
   once: "One Time",
@@ -80,7 +81,7 @@ export function BillsList() {
         await addBill(formattedValues);
       }
       setDialogOpen(false);
-    } catch (error) {
+    } catch (_error) {
       // TODO: Implement proper error handling/logging
     } finally {
       setIsSubmitting(false);
@@ -98,7 +99,7 @@ export function BillsList() {
         await deleteBill(billToDelete);
         setDeleteDialogOpen(false);
         setBillToDelete(null);
-      } catch (error) {
+      } catch (_error) {
         // TODO: Implement proper error handling/logging
       }
     }
@@ -115,7 +116,7 @@ export function BillsList() {
         await markBillAsPaid(billToPay);
         setPayDialogOpen(false);
         setBillToPay(null);
-      } catch (error) {
+      } catch (_error) {
         // TODO: Implement proper error handling/logging
       }
     }

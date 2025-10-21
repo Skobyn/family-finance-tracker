@@ -1,5 +1,6 @@
-import { db } from '@/lib/firebase-client';
 import { doc, setDoc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
 
 /**
  * Stores Plaid access tokens and item IDs in Firestore
@@ -33,7 +34,7 @@ export async function storePlaidToken(
       updated_at: new Date().toISOString()
     });
     
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -59,7 +60,7 @@ export async function getPlaidToken(itemId: string): Promise<string | null> {
     }
     
     return null;
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -87,7 +88,7 @@ export async function getUserPlaidItems(userId: string) {
       id: doc.id,
       ...doc.data()
     }));
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -163,7 +164,7 @@ export async function storePlaidAccounts(
       }
     }
     
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -201,7 +202,7 @@ export async function storePlaidTransactions(
         
         // Find a matching category (simplified)
         // In a real app, you'd have more sophisticated category matching
-        let categoryId = null;
+        const categoryId = null;
         
         // Create the transaction
         await setDoc(transactionRef, {
@@ -223,7 +224,7 @@ export async function storePlaidTransactions(
       }
     }
     
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 } 

@@ -1,26 +1,26 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/providers/firebase-auth-provider";
-import { Button } from "@/components/ui/button";
-import { MainLayout } from "@/components/layout/main-layout";
-import { BalanceCard } from "@/components/dashboard/balance-card";
-import { CashFlowChart } from "@/components/dashboard/cash-flow-chart";
-import { IncomeList } from "@/components/dashboard/income-list";
-import { BillsList } from "@/components/dashboard/bills-list";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { SetupGuide } from "@/components/onboarding/setup-guide";
-import { useFinancialProfile, useIncomes, useBills, useExpenses } from "@/hooks/use-financial-data";
-import { FinancialProfile, Bill, Expense, Income } from "@/types/financial";
-import { ArrowRight, X } from "lucide-react";
 import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
-import { db } from "@/lib/firebase-client";
+import { ArrowRight, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
-import { initializeCollections } from '@/utils/database-debug';
+
+import { BalanceCard } from "@/components/dashboard/balance-card";
+import { BillsList } from "@/components/dashboard/bills-list";
+import { CashFlowChart } from "@/components/dashboard/cash-flow-chart";
 import { DebugPanel } from "@/components/dashboard/debug-panel";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { IncomeList } from "@/components/dashboard/income-list";
+import { MainLayout } from "@/components/layout/main-layout";
+import { SetupGuide } from "@/components/onboarding/setup-guide";
+import { Button } from "@/components/ui/button";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useFinancialProfile, useIncomes, useBills, useExpenses } from "@/hooks/use-financial-data";
+import { db } from "@/lib/firebase-client";
+ from "@/lib/utils";
+import { useAuth } from "@/providers/firebase-auth-provider";
+import { FinancialProfile, Bill, Expense, Income } from "@/types/financial";
+ from '@/utils/database-debug';
 
 function formatCashFlowEvents(bills: Bill[], expenses: Expense[], incomes: Income[]) {
   const events = [
@@ -68,16 +68,16 @@ export default function DashboardPage() {
   const { user, loading } = useAuth();
   const { profile, loading: profileLoading, updateBalance } = useFinancialProfile();
   const { incomes, loading: incomesLoading, error: incomesError, updateIncome, deleteIncome } = useIncomes();
-  const { bills, loading: billsLoading } = useBills();
-  const { expenses, loading: expensesLoading } = useExpenses();
+  const { bills, loading: _billsLoading } = useBills();
+  const { expenses, loading: _expensesLoading } = useExpenses();
   const [showSetupGuide, setShowSetupGuide] = useState(false);
-  const [showBalanceModal, setShowBalanceModal] = useState(false);
-  const [balance, setBalance] = useState<number | null>(null);
+  const [_showBalanceModal, _setShowBalanceModal] = useState(false);
+  const [_balance, _setBalance] = useState<number | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
 
-  const cashFlowEvents = useMemo(() => {
+  const _cashFlowEvents = useMemo(() => {
     return formatCashFlowEvents(bills || [], expenses || [], incomes);
   }, [bills, expenses, incomes]);
 
@@ -172,10 +172,10 @@ export default function DashboardPage() {
             }, { merge: true });
           } else {
           }
-        } catch (err) {
+        } catch (_err) {
         }
       }
-    } catch (error) {
+    } catch (_error) {
     }
   };
 
@@ -186,7 +186,7 @@ export default function DashboardPage() {
       toast.success(`Balance updated to $${amount.toFixed(2)}`);
       // Mark that setup has begun but don't close the guide
       // Allow the user to continue with the next steps
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to update balance");
     }
   };

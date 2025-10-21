@@ -1,8 +1,10 @@
 "use client"
 
+import { CalendarIcon, TrendingDown, TrendingUp, AlertCircle, ArrowUp, ArrowDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
-import { CalendarIcon, TrendingDown, TrendingUp, AlertCircle, ArrowUp, ArrowDown } from "lucide-react";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import {
   Select,
   SelectContent,
@@ -19,11 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useFinancialData } from "@/hooks/use-financial-data";
 import { ForecastItem, BalanceAdjustment } from "@/types/financial";
 import { generateCashFlowForecast, formatCurrency, formatDate } from "@/utils/financial-utils";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface CashFlowChartProps {
   days?: number;
@@ -138,7 +139,7 @@ export function CashFlowChart({ days = 14 }: CashFlowChartProps) {
 
         // Set the forecast data in state
         setForecastData(forecast);
-      } catch (error) {
+      } catch (_error) {
         setError(error instanceof Error ? error.message : "Unable to generate forecast");
         // Provide default data to prevent rendering issues
         setForecastData([{
@@ -372,7 +373,7 @@ function EnhancedTooltip({ active, payload }: any) {
           )}
         </div>
       );
-    } catch (err) {
+    } catch (_err) {
       return <div className="bg-white p-3 border rounded-md shadow-sm">Error displaying data</div>;
     }
   }

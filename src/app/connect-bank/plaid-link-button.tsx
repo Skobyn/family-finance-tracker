@@ -1,8 +1,9 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { usePlaidLinkFlow } from "@/hooks/use-plaid-link";
-import { Loader2 } from "lucide-react";
 
 interface PlaidLinkButtonProps {
   children: React.ReactNode;

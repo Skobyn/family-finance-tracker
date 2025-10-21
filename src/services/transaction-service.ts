@@ -3,8 +3,6 @@
  * Handles all expense/transaction-related operations
  */
 
-import { db } from '@/lib/firebase-client';
-import { Expense } from '@/types/financial';
 import {
   collection,
   doc,
@@ -18,6 +16,9 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
+import { Expense } from '@/types/financial';
 
 /**
  * Add a new expense
@@ -38,7 +39,7 @@ export const addExpense = async (
     // Use user-specific path
     const docRef = await addDoc(collection(db, `users/${userId}/expenses`), newExpense);
     return { id: docRef.id, ...newExpense };
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -66,7 +67,7 @@ export const updateExpense = async (
     };
 
     await updateDoc(expenseRef, updatedData);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -85,7 +86,7 @@ export const deleteExpense = async (id: string, userId: string): Promise<void> =
     }
 
     await deleteDoc(expenseRef);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -129,7 +130,7 @@ export const getExpenses = async (userId: string): Promise<Expense[]> => {
 
       return fallbackResults;
     }
-  } catch (error) {
+  } catch (_error) {
 
     // Return empty array rather than throwing
     return [];
@@ -165,7 +166,7 @@ export const addExpenseRecord = async (
       id: docRef.id,
       ...newExpense
     };
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };

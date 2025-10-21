@@ -3,8 +3,6 @@
  * Handles all financial goal-related operations
  */
 
-import { db } from '@/lib/firebase-client';
-import { Goal } from '@/types/financial';
 import {
   collection,
   doc,
@@ -18,6 +16,9 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
+import { Goal } from '@/types/financial';
 
 /**
  * Add a new goal
@@ -38,7 +39,7 @@ export const addGoal = async (
     // Use user-specific path
     const docRef = await addDoc(collection(db, `users/${userId}/goals`), newGoal);
     return { id: docRef.id, ...newGoal };
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -66,7 +67,7 @@ export const updateGoal = async (
     };
 
     await updateDoc(goalRef, updatedData);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -85,7 +86,7 @@ export const deleteGoal = async (id: string, userId: string): Promise<void> => {
     }
 
     await deleteDoc(goalRef);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -129,7 +130,7 @@ export const getGoals = async (userId: string): Promise<Goal[]> => {
 
       return fallbackResults;
     }
-  } catch (error) {
+  } catch (_error) {
 
     // Return empty array rather than throwing
     return [];

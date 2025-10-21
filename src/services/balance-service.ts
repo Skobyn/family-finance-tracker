@@ -3,9 +3,10 @@
  * Handles user financial profile and balance operations
  */
 
+import { doc, getDoc, setDoc, addDoc, collection } from 'firebase/firestore';
+
 import { db } from '@/lib/firebase-client';
 import { FinancialProfile, BalanceAdjustment } from '@/types/financial';
-import { doc, getDoc, setDoc, addDoc, collection } from 'firebase/firestore';
 
 /**
  * Get a user's financial profile
@@ -30,7 +31,7 @@ export const getFinancialProfile = async (userId: string): Promise<FinancialProf
 
     await setDoc(docRef, defaultProfile);
     return defaultProfile;
-  } catch (error) {
+  } catch (_error) {
     // Return a default profile rather than throwing
     return {
       userId,
@@ -99,7 +100,7 @@ export const updateBalance = async (
     await addDoc(collection(db, `users/${userId}/balanceAdjustments`), adjustmentData);
 
     return updatedProfile;
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };

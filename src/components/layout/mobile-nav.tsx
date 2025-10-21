@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Menu, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function MobileNav() {

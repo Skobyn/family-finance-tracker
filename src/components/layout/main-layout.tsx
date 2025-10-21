@@ -1,9 +1,10 @@
 "use client";
 
-import { MainNav } from "@/components/layout/main-nav";
-import { UserNav } from "@/components/layout/user-nav";
-import { MobileNav } from "@/components/layout/mobile-nav";
 import { TrendingUp } from "lucide-react";
+
+import { MainNav } from "@/components/layout/main-nav";
+import { MobileNav } from "@/components/layout/mobile-nav";
+import { UserNav } from "@/components/layout/user-nav";
 
 interface MainLayoutProps {
   children: React.ReactNode;

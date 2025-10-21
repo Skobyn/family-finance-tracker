@@ -1,8 +1,10 @@
 "use client";
 
+import { PlusCircle, List } from "lucide-react";
 import { useState, useRef } from "react";
-import { MainLayout } from "@/components/layout/main-layout";
+
 import { ProtectedRoute } from "@/components/auth/protected-route";
+import { MainLayout } from "@/components/layout/main-layout";
 import { 
   Card, 
   CardContent, 
@@ -11,9 +13,9 @@ import {
   CardTitle 
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { TransactionForm } from "./TransactionForm";
 import { TransactionList, TransactionListRef } from "./TransactionList";
-import { PlusCircle, List } from "lucide-react";
 
 export default function TransactionsPage() {
   const [activeTab, setActiveTab] = useState("list");

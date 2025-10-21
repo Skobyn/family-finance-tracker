@@ -1,6 +1,10 @@
 "use client";
 
+import { User, Settings, LogOut, HelpCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,10 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/providers/firebase-auth-provider";
-import { User, Settings, LogOut, HelpCircle } from "lucide-react";
 
 export function UserNav() {
   const { user, signOut } = useAuth();

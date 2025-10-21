@@ -3,8 +3,6 @@
  * Handles all bill-related operations
  */
 
-import { db } from '@/lib/firebase-client';
-import { Bill } from '@/types/financial';
 import {
   collection,
   doc,
@@ -18,6 +16,9 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
+import { Bill } from '@/types/financial';
 
 /**
  * Add a new bill
@@ -38,7 +39,7 @@ export const addBill = async (
     // Use user-specific path
     const docRef = await addDoc(collection(db, `users/${userId}/bills`), newBill);
     return { id: docRef.id, ...newBill };
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -66,7 +67,7 @@ export const updateBill = async (
     };
 
     await updateDoc(billRef, updatedData);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -85,7 +86,7 @@ export const deleteBill = async (id: string, userId: string): Promise<void> => {
     }
 
     await deleteDoc(billRef);
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };
@@ -129,7 +130,7 @@ export const getBills = async (userId: string): Promise<Bill[]> => {
 
       return fallbackResults;
     }
-  } catch (error) {
+  } catch (_error) {
 
     // Return empty array rather than throwing
     return [];
@@ -165,7 +166,7 @@ export const markBillAsPaid = async (
     const billData = billSnap.data() as Bill;
     if (billData.isRecurring && billData.frequency !== 'once') {
       // Calculate next due date based on frequency
-      let nextDate = new Date(billData.dueDate);
+      const nextDate = new Date(billData.dueDate);
 
       switch (billData.frequency) {
         case 'weekly':
@@ -190,7 +191,7 @@ export const markBillAsPaid = async (
         nextDueDate: nextDate.toISOString()
       });
     }
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 };

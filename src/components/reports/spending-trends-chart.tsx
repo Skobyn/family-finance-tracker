@@ -1,10 +1,11 @@
 "use client";
 
+import { eachDayOfInterval, format, startOfDay, endOfDay } from "date-fns";
 import { useMemo } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { formatCurrency } from "@/utils/financial-utils";
+
 import { Bill, Expense } from "@/types/financial";
-import { eachDayOfInterval, format, startOfDay, endOfDay } from "date-fns";
+import { formatCurrency } from "@/utils/financial-utils";
 
 interface SpendingTrendsChartProps {
   expenses: (Bill | Expense)[];

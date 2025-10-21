@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { DollarSign } from "lucide-react";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { DollarSign } from "lucide-react";
+
 
 // Form schema for income
 const formSchema = z.object({
@@ -60,7 +61,7 @@ export default function AddIncomeForm({ onAddIncome }: AddIncomeFormProps) {
       
       await onAddIncome(formattedData);
       form.reset();
-    } catch (error) {
+    } catch (_error) {
     } finally {
       setIsSubmitting(false);
     }

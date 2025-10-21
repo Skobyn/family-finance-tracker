@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { toast } from 'sonner';
+
 import { useAuth } from '@/providers/firebase-auth-provider';
+import * as FinancialService from '@/services/financial-service';
 import {
   Income, Bill, Expense, Budget, Goal, FinancialProfile
 } from '@/types/financial';
-import * as FinancialService from '@/services/financial-service';
-import { toast } from 'sonner';
 
 // Helper to ensure user data is properly initialized
 const ensureUserDataInitialized = async (userId: string) => {
@@ -14,7 +15,7 @@ const ensureUserDataInitialized = async (userId: string) => {
     
     // Can add more initialization checks here if needed
     return true;
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 };
@@ -112,7 +113,7 @@ export function useFinancialProfile() {
     const initProfile = async () => {
       try {
         if (mounted) await fetchProfile();
-      } catch (err) {
+      } catch (_err) {
       }
     };
     
@@ -230,7 +231,7 @@ export function useIncomes() {
     const initData = async () => {
       try {
         await fetchIncomes();
-      } catch (err) {
+      } catch (_err) {
       }
     };
     
@@ -277,7 +278,7 @@ export function useBills() {
         setBills(userBills);
         setBillsLoading(false);
       }
-    } catch (error) {
+    } catch (_error) {
       if (mounted) {
         setFetchError("Failed to fetch bills. Please try again.");
         setBillsLoading(false);
@@ -385,7 +386,7 @@ export function useBills() {
     const initData = async () => {
       try {
         await fetchBills();
-      } catch (err) {
+      } catch (_err) {
       }
     };
     
@@ -414,7 +415,7 @@ export function useExpenses() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [loading, setExpensesLoading] = useState(true);
   const [error, setFetchError] = useState<any>(null);
-  let mounted = true;
+  const mounted = true;
 
   const fetchExpenses = useCallback(async () => {
     if (!user) {
@@ -431,7 +432,7 @@ export function useExpenses() {
         setExpenses(userExpenses);
         setExpensesLoading(false);
       }
-    } catch (error) {
+    } catch (_error) {
       if (mounted) {
         setFetchError("Failed to fetch expenses. Please try again.");
         setExpensesLoading(false);
@@ -497,7 +498,7 @@ export function useExpenses() {
     const initData = async () => {
       try {
         await fetchExpenses();
-      } catch (err) {
+      } catch (_err) {
       }
     };
     
@@ -525,7 +526,7 @@ export function useBudgets() {
   const [budgets, setBudgets] = useState<any[]>([]);
   const [loading, setBudgetsLoading] = useState(true);
   const [error, setFetchError] = useState<any>(null);
-  let mounted = true;
+  const mounted = true;
 
   const fetchBudgets = useCallback(async () => {
     if (!user) {
@@ -542,7 +543,7 @@ export function useBudgets() {
         setBudgets(userBudgets);
         setBudgetsLoading(false);
       }
-    } catch (error) {
+    } catch (_error) {
       if (mounted) {
         setFetchError("Failed to fetch budgets. Please try again.");
         setBudgetsLoading(false);
@@ -608,7 +609,7 @@ export function useBudgets() {
     const initData = async () => {
       try {
         await fetchBudgets();
-      } catch (err) {
+      } catch (_err) {
       }
     };
     
@@ -636,7 +637,7 @@ export function useGoals() {
   const [goals, setGoals] = useState<Goal[]>([]);
   const [loading, setGoalsLoading] = useState(true);
   const [error, setFetchError] = useState<any>(null);
-  let mounted = true;
+  const mounted = true;
 
   const fetchGoals = useCallback(async () => {
     if (!user) {
@@ -653,7 +654,7 @@ export function useGoals() {
         setGoals(userGoals);
         setGoalsLoading(false);
       }
-    } catch (error) {
+    } catch (_error) {
       if (mounted) {
         setFetchError("Failed to fetch goals. Please try again.");
         setGoalsLoading(false);
@@ -723,7 +724,7 @@ export function useGoals() {
     const initData = async () => {
       try {
         await fetchGoals();
-      } catch (err) {
+      } catch (_err) {
       }
     };
     
@@ -765,7 +766,7 @@ async function safeAsyncFetch<T>(fetchFn: () => Promise<T>, maxRetries = 1): Pro
       // Increase timeout on retries
       const timeout = 8000 + (retries * 2000);
       return await fetchWithTimeout(timeout) as T;
-    } catch (err) {
+    } catch (_err) {
       retries++;
       
       if (retries > maxRetries) {
@@ -810,7 +811,7 @@ export function useFinancialData() {
     const safeRefetch = async (name: string, refetchFn: Function) => {
       try {
         await refetchFn();
-      } catch (err) {
+      } catch (_err) {
       }
     };
     

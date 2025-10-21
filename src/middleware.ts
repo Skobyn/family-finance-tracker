@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import type { NextRequest } from 'next/server';
 
 // Middleware to handle auth redirects
