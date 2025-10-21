@@ -74,7 +74,6 @@ export default function AddExpenseForm({ onAddExpense }: AddExpenseFormProps) {
       await onAddExpense(formattedData);
       form.reset();
     } catch (error) {
-      console.error("Error adding expense:", error);
     } finally {
       setIsSubmitting(false);
     }

@@ -1,0 +1,31 @@
+{
+  "name": "api-security-audit",
+  "version": "1.0.0",
+  "description": "Comprehensive API security auditing and vulnerability scanning",
+  "category": "development",
+  "tags": ["security", "api", "audit", "vulnerabilities"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "scan-api-routes",
+      "name": "Scan API Routes for Vulnerabilities",
+      "description": "Audit all API routes for common security issues",
+      "prompt": "Perform comprehensive API security audit:\n\n1. Scan all routes in src/app/api/\n2. Check for:\n   - Missing authentication\n   - Missing input validation\n   - SQL injection vulnerabilities\n   - XSS vulnerabilities\n   - CSRF protection\n   - Rate limiting implementation\n   - Sensitive data exposure\n3. Verify rate limiting is applied\n4. Check error handling doesn't leak info\n5. Generate security audit report in docs/API_SECURITY_AUDIT.md\n6. Provide remediation recommendations",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "implement-auth-middleware",
+      "name": "Implement Authentication Middleware",
+      "description": "Add robust authentication to API routes",
+      "prompt": "Create authentication middleware:\n\n1. Build auth middleware in src/middleware/auth.ts\n2. Implement:\n   - JWT token validation\n   - Firebase auth verification\n   - Role-based access control\n   - Session management\n3. Apply to all protected routes\n4. Add request user context\n5. Handle auth errors properly\n6. Document usage in docs/DEVELOPMENT.md",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "integrate-rate-limiting",
+      "name": "Apply Rate Limiting to All Routes",
+      "description": "Integrate rate limiting middleware across API",
+      "prompt": "Apply rate limiting to API routes:\n\n1. Use existing middleware from src/middleware/rate-limit.ts\n2. Apply appropriate limiters:\n   - strictRateLimiter for auth routes\n   - rateLimiter for mutation routes\n   - lenientRateLimiter for read routes\n3. Update all routes in src/app/api/\n4. Add rate limit headers to responses\n5. Test rate limiting behavior\n6. Document rate limits in API docs",
+      "agentType": "general-purpose"
+    }
+  ]
+}

@@ -103,7 +103,6 @@ export default function BillForm({
       ...values,
       isRecurring: values.frequency !== "once"
     };
-    console.log('Submitting bill form with data:', submissionValues);
     onSubmit(submissionValues);
   };
 

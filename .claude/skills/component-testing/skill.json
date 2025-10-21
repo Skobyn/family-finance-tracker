@@ -1,0 +1,31 @@
+{
+  "name": "component-testing",
+  "version": "1.0.0",
+  "description": "Automated component testing with Jest and React Testing Library",
+  "category": "development",
+  "tags": ["testing", "jest", "components", "quality"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "setup-jest",
+      "name": "Set Up Jest Testing Framework",
+      "description": "Configure Jest and React Testing Library",
+      "prompt": "Set up comprehensive testing infrastructure:\n\n1. Install dependencies:\n   - jest\n   - @testing-library/react\n   - @testing-library/jest-dom\n   - @testing-library/user-event\n2. Create jest.config.js\n3. Configure Next.js compatibility\n4. Set up test utilities in src/test-utils/\n5. Create mock providers (Firebase, etc.)\n6. Add test scripts to package.json\n7. Configure code coverage reporting",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "test-critical-components",
+      "name": "Create Tests for Critical Components",
+      "description": "Write comprehensive tests for key components",
+      "prompt": "Create tests for critical components:\n\n1. Test dashboard components:\n   - balance-card.tsx\n   - cash-flow-chart.tsx\n   - bills-list.tsx\n   - income-list.tsx\n2. Test form components:\n   - bill-form.tsx\n   - add-expense-form.tsx\n   - add-income-form.tsx\n3. Test each component for:\n   - Rendering\n   - User interactions\n   - Data handling\n   - Error states\n   - Loading states\n4. Aim for 80%+ coverage\n5. Place tests in __tests__ directories",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "test-services",
+      "name": "Unit Test Service Modules",
+      "description": "Create unit tests for all service modules",
+      "prompt": "Write unit tests for services:\n\n1. Test all service modules in src/services/:\n   - balance-service.ts\n   - bill-service.ts\n   - budget-service.ts\n   - goal-service.ts\n   - income-service.ts\n   - transaction-service.ts\n2. Mock Firestore operations\n3. Test success and error cases\n4. Test edge cases and validation\n5. Achieve 90%+ coverage for services\n6. Create test utilities for Firestore mocks",
+      "agentType": "general-purpose"
+    }
+  ]
+}

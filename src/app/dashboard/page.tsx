@@ -83,17 +83,14 @@ export default function DashboardPage() {
 
   // Authentication check
   useEffect(() => {
-    console.log("Dashboard auth check - Loading:", loading, "User:", user ? "logged in" : "not logged in");
     
     // Wait for loading to complete before making decisions
     if (!loading) {
       if (!user) {
-        console.log("User not authenticated, redirecting to sign in");
         
         // Check if we're in a potential redirect loop
         const redirectLoopBlocker = sessionStorage.getItem("redirect_loop_blocker");
         if (redirectLoopBlocker === "true") {
-          console.log("Detected potential redirect loop, showing error instead of redirecting");
           toast.error("Authentication issue detected. Please try signing in again.");
           sessionStorage.removeItem("redirect_loop_blocker");
         } else {
@@ -102,7 +99,6 @@ export default function DashboardPage() {
           router.push("/auth/signin");
         }
       } else {
-        console.log("User authenticated:", user.displayName);
         // Clear redirect loop blocker if user is authenticated
         sessionStorage.removeItem("redirect_loop_blocker");
         setAuthChecked(true);
@@ -131,7 +127,6 @@ export default function DashboardPage() {
   const initializeUserCollections = async (userId: string) => {
     if (!db) return;
     
-    console.log("Ensuring collections are initialized for user:", userId);
     
     try {
       // Create financial profile if it doesn't exist yet
@@ -149,9 +144,7 @@ export default function DashboardPage() {
         };
         
         await setDoc(profileRef, defaultProfile);
-        console.log("Created default financial profile");
       } else {
-        console.log("Financial profile already exists for user:", userId);
       }
       
       // Create empty collections if they don't exist
@@ -177,16 +170,12 @@ export default function DashboardPage() {
               created: new Date().toISOString(),
               note: 'This document ensures the collection exists'
             }, { merge: true });
-            console.log(`Initialized collection: ${collectionInfo.name}`);
           } else {
-            console.log(`Collection ${collectionInfo.name} already has data`);
           }
         } catch (err) {
-          console.error(`Error initializing collection ${collectionInfo.name}:`, err);
         }
       }
     } catch (error) {
-      console.error("Error initializing collections:", error);
     }
   };
 
@@ -198,7 +187,6 @@ export default function DashboardPage() {
       // Mark that setup has begun but don't close the guide
       // Allow the user to continue with the next steps
     } catch (error) {
-      console.error("Error updating balance:", error);
       toast.error("Failed to update balance");
     }
   };

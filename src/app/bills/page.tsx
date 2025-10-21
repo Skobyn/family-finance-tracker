@@ -111,7 +111,6 @@ export default function BillsPage() {
 
   // Handle adding a new bill
   const handleAddBill = (values: any) => {
-    console.log("Adding new bill:", values);
     addBill(values);
     setBillDialogOpen(false);
   };
@@ -200,7 +199,6 @@ export default function BillsPage() {
       }
       setBulkEditorOpen(false);
     } catch (error) {
-      console.error("Error saving bulk items:", error);
       toast.error("Failed to save all items. Please try again.");
     }
   };

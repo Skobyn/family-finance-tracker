@@ -203,7 +203,6 @@ export default function ForecastingPage() {
     else if (forecastPeriod === "12m") forecastDays = 365;
 
     // Log recurring items counts for debugging
-    console.log("Forecasting with:", {
       totalIncomes: incomes.length,
       recurringIncomes: incomes.filter(i => i.isRecurring).length,
       totalBills: bills.length,
@@ -244,7 +243,6 @@ export default function ForecastingPage() {
         
         // Limit the number of items if we have too many
         if (forecast.length > 1000) {
-          console.warn(`Limiting forecast from ${forecast.length} to 1000 items for performance`);
           // Keep first and last items, then sample in between
           const first = forecast.slice(0, 1);
           const last = forecast.slice(-100);
@@ -264,7 +262,6 @@ export default function ForecastingPage() {
       setForecastData(forecast);
 
       // Log resulting forecast size
-      console.log(`Generated ${forecast.length} forecast items`);
 
       // Generate monthly breakdown from forecast data
       const monthlyData = generateMonthlyBreakdown(forecast, scenarioForecast);
@@ -286,7 +283,6 @@ export default function ForecastingPage() {
         forecastPeriod
       };
     } catch (error) {
-      console.error("Error generating forecast:", error);
       setForecastData([]);
       setScenarioForecast([]);
     }
@@ -388,7 +384,6 @@ export default function ForecastingPage() {
         
         // Limit the number of items if we have too many
         if (scenarioForecast.length > 1000) {
-          console.warn(`Limiting scenario forecast from ${scenarioForecast.length} to 1000 items`);
           // Keep first and last items, then sample in between
           const first = scenarioForecast.slice(0, 1);
           const last = scenarioForecast.slice(-100);
@@ -406,10 +401,8 @@ export default function ForecastingPage() {
       }
       
       setScenarioForecast(scenarioForecast);
-      console.log(`Generated ${scenarioForecast.length} scenario forecast items`);
       
     } catch (error) {
-      console.error("Error generating scenario forecast:", error);
       setScenarioForecast([]);
     }
   }, [financialData.profileData, financialData.incomesData, financialData.billsData, financialData.expensesData, forecastPeriod, incomeAdjustment, expensesAdjustment, savingsAdjustment, unexpectedExpense, unexpectedExpenseDate]);
@@ -418,7 +411,6 @@ export default function ForecastingPage() {
   const generateMonthlyBreakdown = (forecast: ForecastItem[], scenarioForecast: ForecastItem[] = []) => {
     // Skip if no forecast data
     if (!forecast || forecast.length === 0) {
-      console.log("No forecast data to generate monthly breakdown");
       return [];
     }
     
@@ -448,7 +440,6 @@ export default function ForecastingPage() {
           : items;
           
         if (items.length > processLimit) {
-          console.warn(`Monthly breakdown processing limited from ${items.length} to ${processLimit} items`);
         }
         
         // Process each item in the forecast
@@ -513,7 +504,6 @@ export default function ForecastingPage() {
             // Update the map
             monthlyData.set(monthKey, monthData);
           } catch (err) {
-            console.warn("Error processing item for monthly breakdown:", err);
           }
         }
       };
@@ -535,7 +525,6 @@ export default function ForecastingPage() {
       
       return result;
     } catch (error) {
-      console.error("Error generating monthly breakdown:", error);
       return [];
     }
   };
@@ -567,7 +556,6 @@ export default function ForecastingPage() {
     try {
       generateScenarioForecast();
     } catch (error) {
-      console.error("Error applying scenario:", error);
       toast.error("Failed to apply scenario adjustments");
     }
   };
@@ -653,7 +641,6 @@ export default function ForecastingPage() {
     let dataToProcess = forecastData;
     
     if (forecastData.length > maxDataPoints) {
-      console.log(`Sampling chart data from ${forecastData.length} to ${maxDataPoints} points`);
       // Keep first and last points, then sample the rest evenly
       const first = forecastData.slice(0, 1);
       const last = forecastData.slice(-1);

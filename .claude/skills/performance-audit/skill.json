@@ -1,0 +1,31 @@
+{
+  "name": "performance-audit",
+  "version": "1.0.0",
+  "description": "Performance analysis, optimization, and benchmarking",
+  "category": "production",
+  "tags": ["performance", "optimization", "lighthouse", "benchmarking"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "lighthouse-audit",
+      "name": "Run Lighthouse Performance Audit",
+      "description": "Comprehensive performance analysis with Lighthouse",
+      "prompt": "Perform Lighthouse audit:\n\n1. Set up Lighthouse CI\n2. Run audits for key pages:\n   - Dashboard\n   - Forecasting\n   - Bills\n   - Budgets\n3. Analyze metrics:\n   - Performance score\n   - First Contentful Paint\n   - Largest Contentful Paint\n   - Time to Interactive\n   - Cumulative Layout Shift\n4. Generate performance report\n5. Create optimization recommendations\n6. Set performance budgets\n7. Save to docs/PERFORMANCE_AUDIT.md",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "optimize-bundle",
+      "name": "Optimize Bundle Size",
+      "description": "Analyze and reduce JavaScript bundle size",
+      "prompt": "Optimize bundle size:\n\n1. Analyze current bundle:\n   - Install @next/bundle-analyzer\n   - Generate bundle report\n   - Identify large dependencies\n2. Implement optimizations:\n   - Dynamic imports for heavy components\n   - Remove unused dependencies\n   - Tree-shake libraries\n   - Optimize third-party imports\n3. Configure code splitting:\n   - Route-based splitting\n   - Component-based splitting\n   - Vendor chunk optimization\n4. Set bundle size budgets\n5. Add bundle analysis to CI\n6. Document optimizations",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "database-performance",
+      "name": "Optimize Database Performance",
+      "description": "Improve Firestore query performance",
+      "prompt": "Optimize database performance:\n\n1. Analyze query patterns in services\n2. Implement optimizations:\n   - Add missing indexes\n   - Implement pagination\n   - Add query limits\n   - Use batched operations\n   - Implement caching\n3. Reduce real-time listeners\n4. Optimize data fetching:\n   - Fetch only needed fields\n   - Combine queries where possible\n   - Implement prefetching\n5. Create performance benchmarks\n6. Add query monitoring\n7. Document query best practices",
+      "agentType": "general-purpose"
+    }
+  ]
+}

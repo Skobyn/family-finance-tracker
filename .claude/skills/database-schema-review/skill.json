@@ -1,0 +1,31 @@
+{
+  "name": "database-schema-review",
+  "version": "1.0.0",
+  "description": "Firestore schema validation, optimization, and security review",
+  "category": "development",
+  "tags": ["database", "firestore", "schema", "security"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "validate-schema",
+      "name": "Validate Firestore Schema",
+      "description": "Review and validate database schema design",
+      "prompt": "Perform Firestore schema validation:\n\n1. Review all collections:\n   - financialProfiles\n   - incomes\n   - bills\n   - expenses\n   - budgets\n   - goals\n   - plaid_items\n   - balanceAdjustments\n2. Validate:\n   - Data structure consistency\n   - Field naming conventions\n   - Type consistency\n   - Required vs optional fields\n   - Relationships and references\n3. Check for denormalization opportunities\n4. Identify indexing needs\n5. Generate schema documentation\n6. Recommend improvements",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "optimize-queries",
+      "name": "Optimize Database Queries",
+      "description": "Review and optimize Firestore queries",
+      "prompt": "Optimize Firestore queries:\n\n1. Analyze all queries in service modules\n2. Identify:\n   - Missing indexes\n   - Inefficient queries\n   - Over-fetching data\n   - N+1 query problems\n3. Create firestore.indexes.json\n4. Implement query optimization:\n   - Add proper indexes\n   - Use composite indexes where needed\n   - Implement pagination\n   - Add query limits\n5. Measure query performance\n6. Document query patterns",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "security-rules-audit",
+      "name": "Audit Firestore Security Rules",
+      "description": "Review security rules for vulnerabilities",
+      "prompt": "Audit Firestore security rules:\n\n1. Review firestore.rules file\n2. Verify:\n   - User isolation is enforced\n   - Household data protection\n   - Field-level security\n   - Write validation rules\n   - Data integrity constraints\n3. Test rules with emulator\n4. Check for:\n   - Data leakage\n   - Privilege escalation\n   - Missing validations\n5. Generate security test suite\n6. Document rule patterns",
+      "agentType": "general-purpose"
+    }
+  ]
+}

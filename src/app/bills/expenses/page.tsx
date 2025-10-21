@@ -134,7 +134,6 @@ export default function BillsExpensesPage() {
       toast.success('Expense saved successfully');
       router.push('/bills');
     } catch (error) {
-      console.error("Error saving expense:", error);
       toast.error("Failed to save expense. Please try again.");
     }
     
@@ -176,7 +175,6 @@ export default function BillsExpensesPage() {
       setBulkEditorOpen(false);
       router.push('/bills'); // Navigate back to bills page
     } catch (error) {
-      console.error("Error saving bulk expenses:", error);
       toast.error("Failed to save all expenses. Please try again.");
     }
   };

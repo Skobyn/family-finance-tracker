@@ -48,10 +48,17 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
 NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 
 # Plaid API Keys
-PLAID_CLIENT_ID=67e04e1d90625d0022c97e26
-PLAID_SECRET=128f18895c078b4d5252dcd05306ee
+PLAID_CLIENT_ID=your-plaid-client-id
+PLAID_SECRET=your-plaid-secret
 PLAID_ENV=sandbox
 PLAID_REDIRECT_URI=https://family-finance-tracker.netlify.app/api/plaid/oauth-redirect
+
+# SECURITY NOTE:
+# Never commit actual API credentials to version control!
+# Store credentials in:
+# - Local development: .env.local file (add to .gitignore)
+# - Production/Netlify: Use Netlify's environment variable settings
+# - Get credentials from: https://dashboard.plaid.com/
 ```
 
 ## Next Steps

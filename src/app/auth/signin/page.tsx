@@ -39,10 +39,8 @@ export default function SignInPage() {
 
   // Redirect if already signed in
   useEffect(() => {
-    console.log("Sign-in page auth check - User:", user ? "logged in" : "not logged in");
     
     if (user) {
-      console.log("User already authenticated, redirecting to dashboard");
       router.push("/dashboard");
     }
     
@@ -73,12 +71,10 @@ export default function SignInPage() {
       }
       
       // Set flag for redirection
-      console.log("Setting just_signed_in flag for redirection");
       sessionStorage.setItem("just_signed_in", "true");
       
       // The redirection will be handled by the auth provider
     } catch (error: any) {
-      console.error("Sign in error:", error);
       toast.error(error.message || "Failed to sign in");
     } finally {
       setLoading(false);
@@ -92,7 +88,6 @@ export default function SignInPage() {
       await signInWithGoogle();
       // The redirection will be handled by the auth provider
     } catch (error) {
-      console.error("Google sign-in error:", error);
       // Error already handled by the auth provider with toast
       setLoading(false);
     }

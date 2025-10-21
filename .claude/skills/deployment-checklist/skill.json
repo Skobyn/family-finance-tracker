@@ -1,0 +1,31 @@
+{
+  "name": "deployment-checklist",
+  "version": "1.0.0",
+  "description": "Comprehensive pre-deployment validation and production readiness checklist",
+  "category": "production",
+  "tags": ["deployment", "production", "checklist", "validation"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "pre-deployment-audit",
+      "name": "Run Pre-Deployment Audit",
+      "description": "Comprehensive check before deploying to production",
+      "prompt": "Perform pre-deployment audit:\n\n1. Security Review:\n   - Verify Firestore rules are production-ready\n   - Check all API routes have authentication\n   - Confirm rate limiting is applied\n   - Verify no secrets in code\n   - Check CSP headers\n2. Code Quality:\n   - Run linting (npm run lint)\n   - Run type checking (npm run typecheck)\n   - Verify test coverage >80%\n   - Check for console statements\n3. Environment:\n   - Validate all env vars in .env.example\n   - Verify production env vars are set\n   - Check Firebase config\n   - Verify Plaid credentials\n4. Build:\n   - Test production build\n   - Check bundle size\n   - Verify image optimization\n5. Generate audit report in docs/PRE_DEPLOYMENT_AUDIT.md",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "create-deployment-guide",
+      "name": "Create Deployment Guide",
+      "description": "Generate step-by-step deployment documentation",
+      "prompt": "Create deployment guide:\n\n1. Document deployment process for Netlify\n2. Include:\n   - Environment variable setup\n   - Build configuration\n   - Domain setup\n   - SSL certificate\n   - Deployment verification\n3. Create rollback procedures\n4. Add troubleshooting section\n5. Include monitoring setup\n6. Add incident response procedures\n7. Save to docs/DEPLOYMENT_GUIDE.md",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "setup-monitoring",
+      "name": "Set Up Production Monitoring",
+      "description": "Configure error tracking and performance monitoring",
+      "prompt": "Set up production monitoring:\n\n1. Integrate error tracking (Sentry or similar):\n   - Install Sentry SDK\n   - Configure error reporting\n   - Set up source maps\n   - Add custom error boundaries integration\n2. Add performance monitoring:\n   - Web Vitals tracking\n   - Custom metrics\n   - API latency tracking\n3. Set up alerts:\n   - Error rate thresholds\n   - Performance degradation\n   - Uptime monitoring\n4. Create monitoring dashboard\n5. Document in docs/MONITORING.md",
+      "agentType": "general-purpose"
+    }
+  ]
+}

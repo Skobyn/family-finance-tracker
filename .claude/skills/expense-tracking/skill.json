@@ -1,0 +1,31 @@
+{
+  "name": "expense-tracking",
+  "version": "1.0.0",
+  "description": "Advanced expense tracking, categorization, and receipt management",
+  "category": "financial",
+  "tags": ["expenses", "transactions", "receipts", "categorization"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "smart-categorization",
+      "name": "Smart Expense Categorization",
+      "description": "Automatic expense categorization using ML patterns",
+      "prompt": "Implement smart expense categorization:\n\n1. Create categorization engine in src/lib/expense-categorizer.ts\n2. Implement:\n   - Pattern matching for common merchants\n   - Learning from user corrections\n   - Confidence scoring\n   - Category suggestions\n3. Add category rules database\n4. Create UI for category management\n5. Integrate with transaction import flow",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "receipt-scanner",
+      "name": "Receipt Scanner & OCR",
+      "description": "Scan and extract data from receipt images",
+      "prompt": "Build receipt scanning functionality:\n\n1. Integrate OCR library (Tesseract.js or cloud OCR)\n2. Create receipt processing service in src/services/receipt-service.ts\n3. Extract:\n   - Merchant name\n   - Total amount\n   - Date\n   - Line items\n4. Create upload UI component\n5. Add receipt storage (Firebase Storage)\n6. Link receipts to transactions",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "recurring-detection",
+      "name": "Detect Recurring Expenses",
+      "description": "Identify and track recurring expenses automatically",
+      "prompt": "Create recurring expense detection:\n\n1. Analyze transaction history for patterns\n2. Build detection algorithm in src/lib/recurring-detector.ts\n3. Detect:\n   - Subscription services\n   - Regular bills\n   - Periodic purchases\n4. Create recurring expense manager UI\n5. Add alerts for upcoming charges\n6. Suggest bill optimization opportunities",
+      "agentType": "general-purpose"
+    }
+  ]
+}

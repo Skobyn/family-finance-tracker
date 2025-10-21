@@ -104,28 +104,23 @@ export function IncomeList({ incomes, onEdit, onDelete, loading, error }: Income
 
   const handleSubmit = async (values: any) => {
     try {
-      console.log("Attempting to save income:", values);
       setIsSubmitting(true);
       const formattedValues = {
         ...values,
         date: values.date.toISOString(),
       };
-      console.log("Formatted income values:", formattedValues);
 
       if (editIncome) {
-        console.log("Updating existing income:", editIncome.id);
         await onEdit({
           id: editIncome.id,
           ...formattedValues,
         });
         setEditDialogOpen(false);
       } else {
-        console.log("Adding new income");
-        console.log("Cannot add new income through this interface");
         toast.error("Adding new income is not supported in this view");
       }
     } catch (error) {
-      console.error("Error saving income:", error);
+      // TODO: Implement proper error handling/logging
     } finally {
       setIsSubmitting(false);
     }

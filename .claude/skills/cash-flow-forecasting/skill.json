@@ -1,0 +1,31 @@
+{
+  "name": "cash-flow-forecasting",
+  "version": "1.0.0",
+  "description": "Predictive cash flow forecasting and financial projection tools",
+  "category": "financial",
+  "tags": ["forecasting", "predictions", "cash-flow", "planning"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "predictive-modeling",
+      "name": "Build Predictive Cash Flow Model",
+      "description": "Create ML-based cash flow predictions",
+      "prompt": "Implement predictive cash flow forecasting:\n\n1. Enhance existing forecast logic in src/components/dashboard/cash-flow-chart.tsx\n2. Build prediction model in src/lib/cash-flow-predictor.ts\n3. Implement:\n   - Historical trend analysis\n   - Seasonal pattern detection\n   - Recurring transaction predictions\n   - Income projection\n4. Add confidence intervals\n5. Create 30/60/90 day forecasts\n6. Visualize predictions with uncertainty bands",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "scenario-planning",
+      "name": "Scenario Planning Tool",
+      "description": "What-if scenario analysis for financial planning",
+      "prompt": "Create scenario planning feature:\n\n1. Build scenario engine in src/lib/scenario-planner.ts\n2. Allow users to model:\n   - Income changes\n   - Major purchases\n   - Debt payoff scenarios\n   - Savings goal impacts\n3. Create interactive scenario builder UI\n4. Show side-by-side comparisons\n5. Add scenario saving and sharing\n6. Integrate with goal planning",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "financial-health-score",
+      "name": "Financial Health Scoring",
+      "description": "Calculate and track financial health metrics",
+      "prompt": "Implement financial health scoring:\n\n1. Create scoring system in src/lib/financial-health.ts\n2. Calculate metrics:\n   - Emergency fund coverage\n   - Debt-to-income ratio\n   - Savings rate\n   - Budget adherence\n   - Net worth trend\n3. Generate overall health score (0-100)\n4. Create health dashboard widget\n5. Provide improvement recommendations\n6. Track score over time",
+      "agentType": "general-purpose"
+    }
+  ]
+}
