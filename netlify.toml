@@ -3,10 +3,9 @@
 
 [build]
   command = "npm run build"
-  publish = ".next"
+  # Removed incorrect publish directory - Netlify Next.js plugin handles this
 
-[build.environment]
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+# Removed NETLIFY_NEXT_PLUGIN_SKIP to enable proper Next.js support
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
