@@ -1,0 +1,31 @@
+{
+  "name": "seo-optimization",
+  "version": "1.0.0",
+  "description": "SEO optimization, metadata, and discoverability improvements",
+  "category": "production",
+  "tags": ["seo", "metadata", "accessibility", "optimization"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "seo-audit",
+      "name": "Run SEO Audit",
+      "description": "Comprehensive SEO analysis and recommendations",
+      "prompt": "Perform SEO audit:\n\n1. Analyze current SEO status:\n   - Meta tags on all pages\n   - Open Graph tags\n   - Twitter Card tags\n   - Structured data\n   - XML sitemap\n   - robots.txt\n2. Check technical SEO:\n   - Page load speed\n   - Mobile responsiveness\n   - HTTPS configuration\n   - Canonical URLs\n   - URL structure\n3. Content analysis:\n   - Heading hierarchy\n   - Alt text on images\n   - Internal linking\n   - Content quality\n4. Generate SEO report\n5. Create improvement plan\n6. Save to docs/SEO_AUDIT.md",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "implement-metadata",
+      "name": "Implement Metadata System",
+      "description": "Add comprehensive metadata to all pages",
+      "prompt": "Implement metadata system:\n\n1. Create metadata utility in src/lib/metadata.ts\n2. Add to all pages:\n   - Title tags\n   - Description meta tags\n   - Open Graph tags\n   - Twitter Card tags\n   - Canonical URLs\n3. Implement dynamic metadata:\n   - Page-specific titles\n   - Dynamic descriptions\n   - Social media images\n4. Add structured data (JSON-LD):\n   - Organization schema\n   - WebApplication schema\n   - FAQ schema (if applicable)\n5. Generate sitemap.xml\n6. Configure robots.txt",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "accessibility-audit",
+      "name": "Accessibility Audit & Fixes",
+      "description": "WCAG compliance review and implementation",
+      "prompt": "Perform accessibility audit:\n\n1. Run automated accessibility tests:\n   - Lighthouse accessibility score\n   - axe DevTools\n   - WAVE evaluation\n2. Check for:\n   - Proper heading hierarchy\n   - ARIA labels and roles\n   - Keyboard navigation\n   - Color contrast ratios\n   - Focus indicators\n   - Alt text on images\n   - Form labels\n3. Implement fixes:\n   - Add missing ARIA labels\n   - Improve keyboard navigation\n   - Fix contrast issues\n   - Add skip links\n4. Test with screen readers\n5. Generate accessibility report\n6. Achieve WCAG 2.1 Level AA compliance",
+      "agentType": "general-purpose"
+    }
+  ]
+}

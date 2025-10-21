@@ -1,0 +1,31 @@
+{
+  "name": "financial-budgeting",
+  "version": "1.0.0",
+  "description": "Comprehensive financial budgeting workflows including templates, analysis, and recommendations",
+  "category": "financial",
+  "tags": ["budgeting", "finance", "planning", "templates"],
+  "author": "Claude Code",
+  "tasks": [
+    {
+      "id": "create-budget-template",
+      "name": "Create Budget Template",
+      "description": "Generate budget templates based on popular methodologies",
+      "prompt": "Create a budget template for the family-finance-tracker application. Choose from:\n\n1. **50/30/20 Rule**: 50% needs, 30% wants, 20% savings\n2. **Zero-Based Budget**: Every dollar has a job\n3. **Envelope System**: Cash-based category budgeting\n4. **Pay Yourself First**: Savings priority budgeting\n\nFor the selected method:\n- Create budget category structure in src/lib/budget-templates.ts\n- Add TypeScript types\n- Create UI component for template selection\n- Add template to budgets page\n- Include realistic category suggestions\n- Add calculation helpers",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "analyze-spending",
+      "name": "Analyze Spending Patterns",
+      "description": "Analyze user spending data and provide insights",
+      "prompt": "Analyze spending patterns in the family-finance-tracker:\n\n1. Review transaction data structure in Firestore\n2. Create spending analysis service in src/services/analytics-service.ts\n3. Implement:\n   - Category-based spending analysis\n   - Month-over-month trends\n   - Unusual spending detection\n   - Budget vs actual comparison\n4. Create visualization components:\n   - Spending by category pie chart\n   - Trend line charts\n   - Budget health indicators\n5. Add insights dashboard page",
+      "agentType": "general-purpose"
+    },
+    {
+      "id": "budget-recommendations",
+      "name": "Generate Budget Recommendations",
+      "description": "AI-powered budget recommendations based on user data",
+      "prompt": "Create smart budget recommendations:\n\n1. Analyze user's historical spending\n2. Create recommendation engine in src/lib/budget-ai.ts\n3. Generate recommendations for:\n   - Optimal category allocations\n   - Savings opportunities\n   - Overspending alerts\n   - Goal-based budget adjustments\n4. Add recommendation UI to dashboard\n5. Include actionable next steps",
+      "agentType": "general-purpose"
+    }
+  ]
+}
