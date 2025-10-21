@@ -1,35 +1,31 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import {
-  CircleDollarSign,
+
   ArrowUp,
   ArrowDown,
-  Calendar,
+
   LineChart,
   TrendingUp,
   Settings,
-  AlertCircle,
+
   Wallet,
-  Plus,
+
   Edit,
-  Check,
-  CalendarClock,
-  CreditCard,
+
+
+
   CalendarCheck
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useCallback } from "react";
 import { useState } from "react";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
+
+import { MainLayout } from "@/components/layout/main-layout";
+import { ForecastChart } from "@/components/reports/forecast-chart";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -37,20 +33,22 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+
 } from "@/components/ui/dialog";
-import { ForecastChart } from "@/components/reports/forecast-chart";
-import { useAuth } from "@/providers/firebase-auth-provider";
-import { useFinancialData } from "@/hooks/use-financial-data";
-import { generateCashFlowForecast } from "@/utils/financial-utils";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { formatCurrency } from "@/utils/financial-utils";
-import { ForecastItem } from "@/types/financial";
-import { toast } from "sonner";
 import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
+import { useFinancialData } from "@/hooks/use-financial-data";
+import { useAuth } from "@/providers/firebase-auth-provider";
+import { ForecastItem } from "@/types/financial";
+import { generateCashFlowForecast } from "@/utils/financial-utils";
+import { formatCurrency } from "@/utils/financial-utils";
 
 // Types for our forecast data
-type ExpectedIncome = {
+type _ExpectedIncome = {
   id: number;
   name: string;
   amount: number;
@@ -59,7 +57,7 @@ type ExpectedIncome = {
   isPredicted: boolean;
 };
 
-type MandatoryExpense = {
+type _MandatoryExpense = {
   id: number;
   name: string;
   amount: number;
@@ -127,8 +125,8 @@ export default function ForecastingPage() {
   
   // State for filters and optional expenses
   const [includeOptionalExpenses, setIncludeOptionalExpenses] = useState(true);
-  const [openAddIncomeDialog, setOpenAddIncomeDialog] = useState(false);
-  const [openAddExpenseDialog, setOpenAddExpenseDialog] = useState(false);
+  const [_openAddIncomeDialog, _setOpenAddIncomeDialog] = useState(false);
+  const [_openAddExpenseDialog, _setOpenAddExpenseDialog] = useState(false);
   
   // Use ref to track last successful generation to prevent infinite loops
   const lastGenerationRef = useRef<{
@@ -201,16 +199,6 @@ export default function ForecastingPage() {
     else if (forecastPeriod === "3m") forecastDays = 90;
     else if (forecastPeriod === "6m") forecastDays = 180;
     else if (forecastPeriod === "12m") forecastDays = 365;
-
-    // Log recurring items counts for debugging
-      totalIncomes: incomes.length,
-      recurringIncomes: incomes.filter(i => i.isRecurring).length,
-      totalBills: bills.length,
-      recurringBills: bills.filter(b => b.isRecurring).length,
-      totalExpenses: expenses.length,
-      plannedExpenses: expenses.filter(e => e.isPlanned).length,
-      forecastDays
-    });
     
     try {
       // Generate baseline forecast with performance guardrails
@@ -503,7 +491,7 @@ export default function ForecastingPage() {
             
             // Update the map
             monthlyData.set(monthKey, monthData);
-          } catch (err) {
+          } catch (_err) {
           }
         }
       };
@@ -618,7 +606,7 @@ export default function ForecastingPage() {
       const optionalExpenses = forecastData
         .filter(item => item.type === 'expense' && optionalCategories.includes(item.category))
         .reduce((sum, item) => sum + Math.abs(item.amount), 0);
-      
+
       projectedExpenses -= optionalExpenses;
     }
     
@@ -667,7 +655,7 @@ export default function ForecastingPage() {
   };
 
   const totals = getPeriodTotals();
-  const chartData = getForecastChartData();
+  const _chartData = getForecastChartData();
 
   // Calculate the forecast period end date
   const getEndDateLabel = () => {
@@ -698,7 +686,7 @@ export default function ForecastingPage() {
           <div className="flex items-center gap-2">
             <div className="flex items-center space-x-4 justify-end mb-2">
               <div className="text-sm text-muted-foreground">Timeframe:</div>
-              <SelectGroup className="flex space-x-1">
+              <div className="flex space-x-1">
                 <Button
                   variant={forecastPeriod === "1m" ? "default" : "outline"}
                   size="sm"
@@ -727,7 +715,7 @@ export default function ForecastingPage() {
                 >
                   1 Year
                 </Button>
-              </SelectGroup>
+              </div>
             </div>
             <Button variant="outline" className="gap-2">
               <Settings className="h-4 w-4" />

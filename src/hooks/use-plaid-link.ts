@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { usePlaidLink, PlaidLinkOnSuccessMetadata } from 'react-plaid-link';
 import { toast } from 'sonner';
+
 import { useAuth } from '@/providers/firebase-auth-provider';
 
 interface UsePlaidLinkProps {

@@ -1,23 +1,5 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import {
   CheckCircle,
   Wallet,
@@ -31,7 +13,25 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useFinancialProfile } from "@/hooks/use-financial-data";
+import React, { useState, useEffect } from "react";
+import { toast } from "sonner";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { 
   Dialog, 
   DialogContent, 
@@ -42,14 +42,17 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
+import { Progress } from "@/components/ui/progress";
+import { useFinancialProfile } from "@/hooks/use-financial-data";
+import { useFinancialData } from '@/hooks/use-financial-data';
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from '@/providers/firebase-auth-provider';
-import { useFinancialData } from '@/hooks/use-financial-data';
-import AddIncomeForm from '../forms/add-income-form';
-import AddExpenseForm from '../forms/add-expense-form';
-import UpdateBalanceForm from '../forms/update-balance-form';
 import { addBill } from '@/services/financial-service';
+
+import AddExpenseForm from '../forms/add-expense-form';
+import AddIncomeForm from '../forms/add-income-form';
+import UpdateBalanceForm from '../forms/update-balance-form';
+
 
 interface SetupGuideProps {
   onClose?: () => void;

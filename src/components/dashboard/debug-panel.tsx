@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, CheckCircle, Link as LinkIcon } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { initializeCollections } from "@/utils/database-debug";
 
 interface DebugPanelProps {
@@ -32,13 +33,15 @@ export function DebugPanel({ userId }: DebugPanelProps) {
       toast.success("Collections initialized successfully! Refreshing...");
       setTimeout(() => window.location.reload(), 1500);
     } catch (error) {
+
+      // eslint-disable-next-line no-console
       console.error("Error initializing collections:", error);
-      
+
       setInitResult({
         success: false,
         message: `Failed to initialize collections: ${error instanceof Error ? error.message : String(error)}`
       });
-      
+
       toast.error("Failed to initialize collections");
     } finally {
       setIsInitializing(false);

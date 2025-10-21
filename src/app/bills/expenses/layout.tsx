@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Bills & Expenses | Family Finance Tracker",

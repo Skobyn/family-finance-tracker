@@ -13,7 +13,7 @@ export function calculateNextOccurrence(startDate: string, frequency: string): s
   }
 
   // Calculate the next occurrence based on frequency
-  let nextDate = new Date(date);
+  const nextDate = new Date(date);
   
   switch (frequency) {
     case 'daily':
@@ -124,15 +124,7 @@ export function generateCashFlowForecast(
     const validBills = Array.isArray(bills) ? bills.slice(0, 100) : [];
     const validExpenses = Array.isArray(expenses) ? expenses.slice(0, 100) : [];
     const validAdjustments = Array.isArray(balanceAdjustments) ? balanceAdjustments.slice(0, 50) : [];
-    
-      balance: normalizedBalance,
-      incomes: validIncomes.length,
-      bills: validBills.length,
-      expenses: validExpenses.length,
-      adjustments: validAdjustments.length,
-      days: normalizedDays
-    });
-    
+
     // Initialize forecast with current balance
     const forecast: ForecastItem[] = [{
       itemId: 'initial-balance',
@@ -147,9 +139,9 @@ export function generateCashFlowForecast(
     
     // Function to safely add items to forecast
     const safelyAddItems = (
-      items: any[], 
+      items: any[],
       processItem: (item: any) => ForecastItem | ForecastItem[] | null,
-      itemType: string
+      _itemType: string
     ) => {
       let processed = 0;
       

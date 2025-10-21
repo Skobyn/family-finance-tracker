@@ -1,12 +1,14 @@
 "use client";
 
+import { startOfMonth, endOfMonth } from "date-fns";
+import { Search, Plus, PieChart, BarChart, Info } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
+
 import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -16,19 +18,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Search, Plus, Edit, AlertTriangle, PieChart, BarChart, Info } from "lucide-react";
-import { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
-import { useAuth } from '@/providers/firebase-auth-provider';
-import { useBudgets, useExpenses } from '@/hooks/use-financial-data';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { toast } from "sonner";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BudgetVisualization } from "@/components/visualizations/budget-visualizations";
-import { startOfMonth, endOfMonth } from "date-fns";
-import { ShoppingCart, Home, Car, Utensils, Dumbbell, Plane } from "lucide-react";
+import { useBudgets, useExpenses } from '@/hooks/use-financial-data';
+import { cn } from "@/lib/utils";
+import { useAuth } from '@/providers/firebase-auth-provider';
+
+
+
 
 type BudgetCategory = {
   id: string;
@@ -44,8 +45,8 @@ type BudgetCategory = {
 export default function BudgetsPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
-  const { budgets, loading: budgetsLoading, addBudget, updateBudget, deleteBudget } = useBudgets();
-  const { expenses, loading: expensesLoading } = useExpenses();
+  const { budgets, loading: budgetsLoading, addBudget, updateBudget: _updateBudget, deleteBudget: _deleteBudget } = useBudgets();
+  const { expenses, loading: _expensesLoading } = useExpenses();
   
   const [openNewBudgetDialog, setOpenNewBudgetDialog] = useState(false);
   const [budgetName, setBudgetName] = useState("");
@@ -135,7 +136,7 @@ export default function BudgetsPage() {
   }
 
   // Filter budget categories based on search
-  const filteredBudgetCategories = budgetCategories.filter(category =>
+  const _filteredBudgetCategories = budgetCategories.filter(category =>
     searchText === "" || category.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
@@ -207,7 +208,7 @@ export default function BudgetsPage() {
   };
 
   // Function to determine status based on spending
-  const getStatusColor = (budgeted: number, spent: number) => {
+  const _getStatusColor = (budgeted: number, spent: number) => {
     if (!spent) return "bg-green-500"; // No spending yet
     
     const percentSpent = (spent / budgeted) * 100;

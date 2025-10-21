@@ -3,8 +3,6 @@
  * Handles all budget-related operations
  */
 
-import { db } from '@/lib/firebase-client';
-import { Budget } from '@/types/financial';
 import {
   collection,
   doc,
@@ -16,6 +14,9 @@ import {
   query,
   orderBy,
 } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
+import { Budget } from '@/types/financial';
 
 /**
  * Add a new budget

@@ -1,9 +1,14 @@
-import { NextResponse } from 'next/server';
-import { plaidClient } from '@/lib/plaid-client';
+import { NextRequest, NextResponse } from 'next/server';
 import { CountryCode, Products } from 'plaid';
-import { getCurrentUser } from '@/lib/firebase-client';
 
-export async function POST() {
+import { getCurrentUser } from '@/lib/firebase-client';
+import { plaidClient } from '@/lib/plaid-client';
+import { rateLimiter } from '@/middleware/rate-limit';
+
+export async function POST(req: NextRequest) {
+  // Apply rate limiting
+  const rateLimitResult = await rateLimiter(req);
+  if (rateLimitResult) return rateLimitResult;
   try {
     // Check if user is authenticated via Firebase using getCurrentUser helper
     // This is safer for API routes than direct auth.currentUser access
@@ -16,7 +21,8 @@ export async function POST() {
     const clientUserId = currentUser.uid;
 
     // Get the redirect URI from environment variable or use default
-    const redirectUri = process.env.PLAID_REDIRECT_URI || 'http://localhost:3000/api/plaid/oauth-redirect';
+    const redirectUri =
+      process.env.PLAID_REDIRECT_URI || 'http://localhost:3000/api/plaid/oauth-redirect';
 
     // Create a link token with the user's ID
     const createTokenResponse = await plaidClient.linkTokenCreate({

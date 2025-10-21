@@ -1,7 +1,8 @@
-import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
-import { getFirestore, Firestore } from 'firebase/firestore';
-import { getAuth, Auth, User, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { getAnalytics, isSupported, Analytics } from 'firebase/analytics';
+import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
+import { getAuth, Auth, User, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { getFirestore, Firestore } from 'firebase/firestore';
+
 import { validateFirebaseEnvironment } from './env-validation';
 
 // Validate Firebase environment variables before initialization

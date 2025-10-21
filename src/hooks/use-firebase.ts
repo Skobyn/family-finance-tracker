@@ -1,4 +1,10 @@
-import { useState, useEffect } from 'react';
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut as firebaseSignOut,
+  onAuthStateChanged,
+  User as FirebaseUser
+} from 'firebase/auth';
 import { 
   collection, 
   query, 
@@ -15,13 +21,8 @@ import {
   getDoc,
   Firestore
 } from 'firebase/firestore';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut as firebaseSignOut,
-  onAuthStateChanged,
-  User as FirebaseUser
-} from 'firebase/auth';
+import { useState, useEffect } from 'react';
+
 import { db as firebaseDb, auth } from '@/lib/firebase-client';
 import { User, mapFirebaseUser } from '@/types/user';
 
@@ -213,7 +214,7 @@ export function useFirestoreData<T>(collectionName: string) {
         throw new Error('Firestore is not initialized');
       }
       
-      let queryRef = collection(db, collectionName);
+      const queryRef = collection(db, collectionName);
       let firestoreQuery = query(queryRef);
       
       // Apply custom query if provided

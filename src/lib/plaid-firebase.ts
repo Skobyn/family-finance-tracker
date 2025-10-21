@@ -1,5 +1,6 @@
-import { db } from '@/lib/firebase-client';
 import { doc, setDoc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
 
 /**
  * Stores Plaid access tokens and item IDs in Firestore
@@ -201,7 +202,7 @@ export async function storePlaidTransactions(
         
         // Find a matching category (simplified)
         // In a real app, you'd have more sophisticated category matching
-        let categoryId = null;
+        const categoryId = null;
         
         // Create the transaction
         await setDoc(transactionRef, {

@@ -3,8 +3,6 @@
  * Handles all income-related operations
  */
 
-import { db } from '@/lib/firebase-client';
-import { Income } from '@/types/financial';
 import {
   collection,
   doc,
@@ -18,6 +16,10 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
+import { Income } from '@/types/financial';
+
 import { calculateNextPaymentDate } from './utils/date-utils';
 
 /**

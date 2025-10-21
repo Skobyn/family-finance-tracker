@@ -1,8 +1,22 @@
 "use client"
 
-import { useState } from "react";
 import { format, parseISO, isAfter, isBefore, addDays } from "date-fns";
 import { Edit, Trash2, Calendar, CheckCircle, Pencil, Info } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+
+import { IncomeForm } from "@/components/forms/income-form";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,23 +39,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Income } from "@/types/financial";
-import { useIncomes } from "@/hooks/use-financial-data";
-import { IncomeForm } from "@/components/forms/income-form";
 import { formatCurrency } from "@/utils/financial-utils";
-import { toast } from "sonner";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+
+
 
 const FREQUENCY_LABEL: Record<string, string> = {
   once: "One Time",
@@ -127,7 +129,7 @@ export function IncomeList({ incomes, onEdit, onDelete, loading, error }: Income
   };
 
   // Check if date is in the past
-  const isPast = (date: string) => {
+  const _isPast = (date: string) => {
     return isBefore(new Date(date), new Date());
   };
 

@@ -1,11 +1,12 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
 import { onAuthStateChanged, User as FirebaseUser, updateProfile as updateFirebaseProfile } from 'firebase/auth';
-import { auth, db, updateAuthCookie } from '@/lib/firebase-client';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { toast } from 'sonner';
+
+import { auth, db, updateAuthCookie } from '@/lib/firebase-client';
 
 // User type that maps Firebase user properties
 export type User = {

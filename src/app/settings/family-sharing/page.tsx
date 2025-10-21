@@ -1,10 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  UserPlus,
+  Eye,
+  
+  Edit,
+  Trash2,
+  UserCog,
+  Mail
+} from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -15,37 +35,15 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { Badge } from "@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
-  TableCaption,
+  
   TableCell,
   TableHead,
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import {
-  Users,
-  UserPlus,
-  UserCheck,
-  Shield,
-  Eye,
-  EyeOff,
-  Edit,
-  Trash2,
-  UserCog,
-  Mail
-} from "lucide-react";
 import { useAuth } from '@/providers/firebase-auth-provider';
 
 // Types for family sharing

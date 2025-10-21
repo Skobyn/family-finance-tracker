@@ -1,5 +1,6 @@
-import { db } from '@/lib/firebase-client';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
 
 /**
  * Creates a new household for a user

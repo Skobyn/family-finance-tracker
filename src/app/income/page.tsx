@@ -1,18 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { PlusIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { useAuth } from "@/providers/firebase-auth-provider";
-import { useIncomes } from "@/hooks/use-financial-data";
 import { IncomeList } from "@/components/dashboard/income-list";
 import { AddIncomeDialog } from "@/components/forms/add-income-dialog";
 import { MainLayout } from "@/components/layout/main-layout";
+import { Button } from "@/components/ui/button";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useIncomes } from "@/hooks/use-financial-data";
+import { useAuth } from "@/providers/firebase-auth-provider";
 
 export default function IncomePage() {
   const [loading, setLoading] = useState(true);

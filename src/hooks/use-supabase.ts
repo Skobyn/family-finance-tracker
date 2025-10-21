@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase-client';
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { useState, useEffect } from 'react';
+
+import { supabase } from '@/lib/supabase-client';
 
 export function useSupabaseAuth() {
   const [session, setSession] = useState<Session | null>(null);

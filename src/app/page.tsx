@@ -1,6 +1,7 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { CircleDollarSign, PiggyBank, LineChart, Calendar } from "lucide-react";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 
 // This is a Server Component - more efficient and reliable for the home page
 export default function Home() {

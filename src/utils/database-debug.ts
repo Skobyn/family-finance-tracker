@@ -1,7 +1,8 @@
 "use client";
 
-import { db } from '@/lib/firebase-client';
 import { doc, setDoc, collection, getDocs, query, where, getDoc } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
 import { FinancialProfile } from '@/types/financial';
 
 /**
@@ -110,8 +111,8 @@ export function getCurrentUserId(): string | null {
  * Add this to a global window object for easy console access
  */
 if (typeof window !== 'undefined') {
-  // @ts-ignore
+  // @ts-expect-error - Adding debug utilities to window for development
   window.initializeFirestoreCollections = initializeCollections;
-  // @ts-ignore
+  // @ts-expect-error - Adding debug utilities to window for development
   window.getCurrentFirebaseUserId = getCurrentUserId;
 } 

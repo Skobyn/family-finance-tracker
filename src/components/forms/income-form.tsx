@@ -1,13 +1,15 @@
 "use client"
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
 
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -19,22 +21,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
 import { INCOME_CATEGORIES } from "@/types/financial";
 import { Income } from "@/types/financial";
-import { Textarea } from "@/components/ui/textarea";
 
 const incomeFormSchema = z.object({
   name: z.string().min(1, "Name is required"),

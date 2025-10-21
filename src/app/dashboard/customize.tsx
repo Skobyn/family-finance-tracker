@@ -1,13 +1,12 @@
 "use client";
 
+import { Check, ChevronsUpDown, Grid, LayoutGrid, Layers, Plus, Settings, X } from "lucide-react";
 import { useState } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Check, ChevronsUpDown, Grid, LayoutGrid, Layers, Move, Plus, Settings, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type WidgetSize = "small" | "medium" | "large";
@@ -126,7 +125,7 @@ export function DashboardCustomize() {
   const enabledWidgets = dashboardWidgets.filter(widget => widget.enabled)
     .sort((a, b) => a.position - b.position);
 
-  const availableToAdd = availableWidgets.filter(available =>
+  const _availableToAdd = availableWidgets.filter(available =>
     !dashboardWidgets.some(widget => widget.type === available.type)
   );
 

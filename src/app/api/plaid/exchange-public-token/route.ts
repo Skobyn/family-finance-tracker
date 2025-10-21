@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { plaidClient } from '@/lib/plaid-client';
+
 import { getCurrentUser } from '@/lib/firebase-client';
+import { plaidClient } from '@/lib/plaid-client';
 import { storePlaidToken } from '@/lib/plaid-firebase';
+import { rateLimiter } from '@/middleware/rate-limit';
 
 export async function POST(request: NextRequest) {
+  // Apply rate limiting
+  const rateLimitResult = await rateLimiter(request);
+  if (rateLimitResult) return rateLimitResult;
+
   try {
     // Check if user is authenticated via Firebase
     const currentUser = await getCurrentUser();
@@ -16,10 +22,7 @@ export async function POST(request: NextRequest) {
     const { publicToken, institution } = body;
 
     if (!publicToken) {
-      return NextResponse.json(
-        { error: 'Missing public token' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Missing public token' }, { status: 400 });
     }
 
     // Exchange the public token for an access token
@@ -31,12 +34,7 @@ export async function POST(request: NextRequest) {
     const itemId = tokenResponse.data.item_id;
 
     // Store the access token and item ID in Firestore
-    await storePlaidToken(
-      currentUser.uid,
-      accessToken,
-      itemId,
-      institution?.name
-    );
+    await storePlaidToken(currentUser.uid, accessToken, itemId, institution?.name);
 
     // Return success response
     return NextResponse.json({
@@ -44,7 +42,6 @@ export async function POST(request: NextRequest) {
       message: 'Account successfully linked',
       itemId,
     });
-
   } catch (error: any) {
     return NextResponse.json(
       { error: 'Failed to exchange token', details: error.message },

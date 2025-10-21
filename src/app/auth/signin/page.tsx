@@ -1,14 +1,17 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { TrendingUp } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import Link from "next/link";
+import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -18,11 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { TrendingUp } from "lucide-react";
-
 import { useAuth } from "@/providers/firebase-auth-provider";
 
 // Form validation schema

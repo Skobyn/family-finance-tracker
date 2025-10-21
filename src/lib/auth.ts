@@ -1,6 +1,8 @@
-import { auth } from './firebase-client';
-import { useAuth } from '@/providers/firebase-auth-provider';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+
+import { useAuth } from '@/providers/firebase-auth-provider';
+
+import { auth } from './firebase-client';
 
 export {
   auth,

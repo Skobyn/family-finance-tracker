@@ -3,8 +3,6 @@
  * Handles all financial goal-related operations
  */
 
-import { db } from '@/lib/firebase-client';
-import { Goal } from '@/types/financial';
 import {
   collection,
   doc,
@@ -18,6 +16,9 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore';
+
+import { db } from '@/lib/firebase-client';
+import { Goal } from '@/types/financial';
 
 /**
  * Add a new goal

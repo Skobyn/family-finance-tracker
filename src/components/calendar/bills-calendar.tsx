@@ -1,15 +1,17 @@
 "use client";
 
+import { format, isEqual, isSameDay, isSameMonth } from "date-fns";
+import { AlertCircle, CheckCircle, DollarSign } from "lucide-react";
 import { useState } from "react";
+import { DayContent, DayProps } from "react-day-picker";
+
+import { Badge } from "@/components/ui/badge";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { format, isEqual, isSameDay, isSameMonth } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Bill, Expense } from "@/types/financial";
-import { AlertCircle, CheckCircle, DollarSign } from "lucide-react";
 import { formatCurrency } from "@/utils/financial-utils";
-import { DayContent, DayProps } from "react-day-picker";
+
 
 interface BillsCalendarProps {
   bills: Bill[];
@@ -26,7 +28,7 @@ export function BillsCalendar({ bills, expenses, onBillClick, onExpenseClick }: 
   const getDayItems = (day: Date) => {
     const billsOnDay = bills.filter(bill => isSameDay(new Date(bill.dueDate), day));
     const expensesOnDay = expenses.filter(expense => isSameDay(new Date(expense.date), day));
-    
+
     return {
       bills: billsOnDay,
       expenses: expensesOnDay,

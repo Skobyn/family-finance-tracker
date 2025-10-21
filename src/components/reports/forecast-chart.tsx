@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
-import { formatCurrency } from "@/utils/financial-utils";
+
 import { ForecastItem } from "@/types/financial";
+import { formatCurrency } from "@/utils/financial-utils";
 
 interface ForecastChartProps {
   baselineData: ForecastItem[];
@@ -49,7 +50,7 @@ export function ForecastChart({ baselineData, scenarioData, className, timeFrame
 
     // Group data into periods
     const periods: { start: Date, end: Date, label: string }[] = [];
-    let currentDate = new Date(startDate);
+    const currentDate = new Date(startDate);
     
     while (currentDate <= endDate) {
       const periodStart = new Date(currentDate);

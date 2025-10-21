@@ -1,7 +1,9 @@
 "use client"
 
+import { Edit } from "lucide-react";
 import { useState } from "react";
-import { ArrowUpCircle, ArrowDownCircle, Edit } from "lucide-react";
+
+import BalanceForm from "@/components/forms/balance-form";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,11 +20,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useFinancialProfile } from "@/hooks/use-financial-data";
 import { FinancialProfile } from "@/types/financial";
 import { formatCurrency } from "@/utils/financial-utils";
-import BalanceForm from "@/components/forms/balance-form";
-import { useFinancialProfile } from "@/hooks/use-financial-data";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 interface BalanceCardProps {
   onUpdateBalance?: (amount: number) => Promise<void>;

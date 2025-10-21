@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react";
+
+import { IncomeForm } from "@/components/forms/income-form";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +10,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { IncomeForm } from "@/components/forms/income-form";
 import { Income } from "@/types/financial";
 
 interface AddIncomeDialogProps {

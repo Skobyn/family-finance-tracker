@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+
+// Note: Using system fonts as fallback to avoid network dependency during build
+// import { Inter } from "next/font/google";
+
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/providers/firebase-auth-provider";
 
-// Configure Inter font
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter',
-});
+// Configure Inter font (commented out to use system fonts during offline builds)
+// const inter = Inter({
+//   subsets: ["latin"],
+//   variable: '--font-inter',
+// });
 
 export const metadata: Metadata = {
   title: "Achievr",
@@ -23,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${inter.className}`}>
+      <body className="font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

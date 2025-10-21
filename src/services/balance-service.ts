@@ -3,9 +3,10 @@
  * Handles user financial profile and balance operations
  */
 
+import { doc, getDoc, setDoc, addDoc, collection } from 'firebase/firestore';
+
 import { db } from '@/lib/firebase-client';
 import { FinancialProfile, BalanceAdjustment } from '@/types/financial';
-import { doc, getDoc, setDoc, addDoc, collection } from 'firebase/firestore';
 
 /**
  * Get a user's financial profile

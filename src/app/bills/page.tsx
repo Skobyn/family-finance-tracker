@@ -1,33 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Calendar as CalendarIcon, BarChart3, Clock, Filter, Plus, Wallet, CircleDollarSign, CheckCircle, CalendarClock, CreditCard, BarChart4, List } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Calendar as CalendarIcon, BarChart3, Clock, Search, CalendarDays, Filter, Plus, Wallet, CircleDollarSign, CheckCircle, CalendarClock, CreditCard, BarChart4, List, AlertCircle } from "lucide-react";
-import { useAuth } from "@/providers/firebase-auth-provider";
-import { useBills, useExpenses } from "@/hooks/use-financial-data";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { Badge } from "@/components/ui/badge";
-import { formatCurrency, formatDate, daysUntil, isOverdue } from "@/utils/financial-utils";
-import { Separator } from "@/components/ui/separator";
-import { SetupGuide } from "@/components/onboarding/setup-guide";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
+
+import { BillsCalendar } from "@/components/calendar/bills-calendar";
 import BillForm from "@/components/forms/bill-form";
-import { Bill, Expense } from "@/types/financial";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { BulkBillsEditor } from "@/components/forms/bulk-bills-editor";
+import { MainLayout } from "@/components/layout/main-layout";
+import { SetupGuide } from "@/components/onboarding/setup-guide";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -38,10 +20,28 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { BulkBillsEditor } from "@/components/forms/bulk-bills-editor";
-import { toast } from "sonner";
-import { format } from "date-fns";
-import { BillsCalendar } from "@/components/calendar/bills-calendar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useBills, useExpenses } from "@/hooks/use-financial-data";
+import { useAuth } from "@/providers/firebase-auth-provider";
+import { Bill } from "@/types/financial";
+import { formatCurrency, formatDate, daysUntil, isOverdue } from "@/utils/financial-utils";
+
+
 
 const FREQUENCY_LABEL: Record<string, string> = {
   once: "One Time",
@@ -58,14 +58,14 @@ export default function BillsPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
   const { bills, loading: billsLoading, addBill, updateBill, deleteBill, markBillAsPaid } = useBills();
-  const { expenses, loading: expensesLoading, addExpense, updateExpense, deleteExpense } = useExpenses();
+  const { expenses, loading: expensesLoading, addExpense, updateExpense, deleteExpense: _deleteExpense } = useExpenses();
 
-  const [activeTab, setActiveTab] = useState("bills");
+  const [_activeTab, _setActiveTab] = useState("bills");
   const [filterText, setFilterText] = useState("");
   const [showPaid, setShowPaid] = useState(false);
-  const [currentView, setCurrentView] = useState<"list" | "calendar">("list");
+  const [_currentView, _setCurrentView] = useState<"list" | "calendar">("list");
   const [showSetupGuide, setShowSetupGuide] = useState(false);
-  const [setupGuideStep, setSetupGuideStep] = useState<"bills" | "expenses">("bills");
+  const [_setupGuideStep, setSetupGuideStep] = useState<"bills" | "expenses">("bills");
   
   // Dialog states
   const [billDialogOpen, setBillDialogOpen] = useState(false);
@@ -110,7 +110,7 @@ export default function BillsPage() {
   };
 
   // Handle adding a new bill
-  const handleAddBill = (values: any) => {
+  const _handleAddBill = (values: any) => {
     addBill(values);
     setBillDialogOpen(false);
   };

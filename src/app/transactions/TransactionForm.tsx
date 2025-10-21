@@ -1,11 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Calendar } from '@/components/ui/calendar';
 import { 
   Form, 
   FormControl, 
@@ -14,6 +18,8 @@ import {
   FormLabel, 
   FormMessage 
 } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { 
   Select, 
   SelectContent, 
@@ -21,14 +27,9 @@ import {
   SelectTrigger, 
   SelectValue 
 } from '@/components/ui/select';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { format } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
-import { toast } from 'sonner';
 import { useFirestoreData } from '@/hooks/use-firebase';
-import { useAuth } from '@/providers/firebase-auth-provider';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/providers/firebase-auth-provider';
 
 // Define the form schema
 const formSchema = z.object({

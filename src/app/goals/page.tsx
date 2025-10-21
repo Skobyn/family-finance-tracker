@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { MainLayout } from "@/components/layout/main-layout";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { GoalVisualization } from "@/components/visualizations/goal-visualizations";
-import { GoalForm } from "@/components/forms/goal-form";
 import { Plus, Home, Plane, Car, Briefcase, GraduationCap, Heart } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
+
+import { GoalForm } from "@/components/forms/goal-form";
+import { MainLayout } from "@/components/layout/main-layout";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GoalVisualization } from "@/components/visualizations/goal-visualizations";
 
 interface Goal {
   id: string;
@@ -150,12 +151,12 @@ export default function GoalsPage() {
     toast.success("Goal updated successfully");
   };
 
-  const handleDeleteGoal = (id: string) => {
+  const _handleDeleteGoal = (id: string) => {
     setGoals(goals.filter(goal => goal.id !== id));
     toast.success("Goal deleted successfully");
   };
 
-  const handleUpdateProgress = (id: string, amount: number) => {
+  const _handleUpdateProgress = (id: string, amount: number) => {
     const updatedGoals = goals.map(goal => 
       goal.id === id ? {
         ...goal,
