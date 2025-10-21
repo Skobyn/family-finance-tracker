@@ -26,7 +26,6 @@ export function Header() {
     if (newName && newName !== user.displayName) {
       updateUserInfo({ displayName: newName })
         .catch(error => {
-          console.error("Error updating name:", error);
           toast.error("Failed to update display name");
         });
     }
@@ -36,7 +35,6 @@ export function Header() {
     try {
       await signOut();
     } catch (error) {
-      console.error("Error signing out:", error);
     }
   };
 

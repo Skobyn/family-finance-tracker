@@ -58,12 +58,9 @@ export default function AddIncomeForm({ onAddIncome }: AddIncomeFormProps) {
         notes: '',
       };
       
-      console.log('Submitting income with data:', formattedData);
       await onAddIncome(formattedData);
-      console.log('Income added successfully');
       form.reset();
     } catch (error) {
-      console.error("Error adding income:", error);
     } finally {
       setIsSubmitting(false);
     }

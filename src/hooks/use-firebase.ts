@@ -64,7 +64,6 @@ export function useFirebaseAuth() {
           try {
             // Check if db is null before using it
             if (!db) {
-              console.error('Firestore is not initialized');
               setLoading(false);
               return;
             }
@@ -89,7 +88,6 @@ export function useFirebaseAuth() {
               setUserProfile(defaultProfile);
             }
           } catch (error) {
-            console.error('Error fetching user profile:', error);
           }
         } else {
           setUser(null);
@@ -121,7 +119,6 @@ export function useFirebaseAuth() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       return userCredential.user;
     } catch (error) {
-      console.error('Error signing in:', error);
       throw error;
     }
   }
@@ -147,7 +144,6 @@ export function useFirebaseAuth() {
       
       return user;
     } catch (error) {
-      console.error('Error signing up:', error);
       throw error;
     }
   }
@@ -177,7 +173,6 @@ export function useFirebaseAuth() {
         });
       }
     } catch (error) {
-      console.error('Error updating profile:', error);
       throw error;
     }
   }
@@ -189,7 +184,6 @@ export function useFirebaseAuth() {
       const { signOut: firebaseSignOut } = await import('firebase/auth');
       await firebaseSignOut(auth);
     } catch (error) {
-      console.error('Error signing out:', error);
       throw error;
     }
   }
@@ -236,7 +230,6 @@ export function useFirestoreData<T>(collectionName: string) {
       setData(documents);
     } catch (err: any) {
       setError(new Error(err.message));
-      console.error(`Error fetching data from ${collectionName}:`, err);
     } finally {
       setLoading(false);
     }
@@ -258,7 +251,6 @@ export function useFirestoreData<T>(collectionName: string) {
       
       return null;
     } catch (err: any) {
-      console.error(`Error getting document from ${collectionName}:`, err);
       throw err;
     }
   }
@@ -284,7 +276,6 @@ export function useFirestoreData<T>(collectionName: string) {
       
       return { id: docRef.id, ...docWithTimestamps } as T;
     } catch (err: any) {
-      console.error(`Error adding document to ${collectionName}:`, err);
       throw err;
     }
   }
@@ -311,7 +302,6 @@ export function useFirestoreData<T>(collectionName: string) {
       
       return { id, ...updatesWithTimestamp } as T;
     } catch (err: any) {
-      console.error(`Error updating document in ${collectionName}:`, err);
       throw err;
     }
   }
@@ -329,7 +319,6 @@ export function useFirestoreData<T>(collectionName: string) {
       // Refresh data after deleting
       await fetchData();
     } catch (err: any) {
-      console.error(`Error deleting document from ${collectionName}:`, err);
       throw err;
     }
   }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -238,7 +239,6 @@ export function SubscriptionManager() {
 
   const handleAddSubscription = () => {
     // In a real app, this would save to a database
-    console.log("New subscription:", newSubscription);
     setOpenAddDialog(false);
     setNewSubscription({
       name: "",
@@ -533,8 +533,8 @@ export function SubscriptionManager() {
                       <TableCell>
                         <div className="flex items-center gap-2">
                           {subscription.logoUrl && (
-                            <div className="h-8 w-8 rounded overflow-hidden">
-                              <img src={subscription.logoUrl} alt={subscription.name} className="h-full w-full object-cover" />
+                            <div className="h-8 w-8 rounded overflow-hidden relative">
+                              <Image src={subscription.logoUrl} alt={subscription.name} fill className="object-cover" />
                             </div>
                           )}
                           <div>
@@ -582,8 +582,8 @@ export function SubscriptionManager() {
                       <TableCell>
                         <div className="flex items-center gap-2">
                           {subscription.logoUrl && (
-                            <div className="h-8 w-8 rounded overflow-hidden">
-                              <img src={subscription.logoUrl} alt={subscription.name} className="h-full w-full object-cover opacity-60" />
+                            <div className="h-8 w-8 rounded overflow-hidden relative">
+                              <Image src={subscription.logoUrl} alt={subscription.name} fill className="object-cover opacity-60" />
                             </div>
                           )}
                           <div>
@@ -655,8 +655,8 @@ export function SubscriptionManager() {
                   <div key={subscription.id} className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       {subscription.logoUrl && (
-                        <div className="h-6 w-6 rounded overflow-hidden">
-                          <img src={subscription.logoUrl} alt={subscription.name} className="h-full w-full object-cover" />
+                        <div className="h-6 w-6 rounded overflow-hidden relative">
+                          <Image src={subscription.logoUrl} alt={subscription.name} fill className="object-cover" />
                         </div>
                       )}
                       <div>

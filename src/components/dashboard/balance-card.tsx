@@ -36,16 +36,16 @@ export function BalanceCard({ onUpdateBalance }: BalanceCardProps) {
   const handleUpdateBalance = async (values: { newBalance: number; reason: string }) => {
     try {
       setIsSubmitting(true);
-      
+
       if (onUpdateBalance) {
         await onUpdateBalance(values.newBalance);
       } else {
         await updateBalance(values.newBalance, values.reason);
       }
-      
+
       setOpen(false);
     } catch (error) {
-      console.error("Failed to update balance:", error);
+      // TODO: Implement proper error handling/logging
     } finally {
       setIsSubmitting(false);
     }

@@ -60,7 +60,6 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Error fetching transactions:', error);
     return NextResponse.json(
       { error: 'Failed to fetch transactions', details: error.message },
       { status: 500 }

@@ -107,15 +107,12 @@ export function CashFlowChart({ days = 14 }: CashFlowChartProps) {
     timeoutRef.current = setTimeout(() => {
       try {
         const days = parseInt(timeframe);
-        
-        // Log what we're working with
-        console.log(`Generating forecast with ${incomesArray.length} incomes and ${billsArray.length} bills`);
-        
+
         // Double-check for valid data before generating forecast
         if (typeof currentBalance !== 'number' || isNaN(currentBalance)) {
           throw new Error("Invalid current balance for forecast");
         }
-        
+
         // Call the forecast generation utility
         const forecast = generateCashFlowForecast(
           currentBalance,
@@ -125,12 +122,12 @@ export function CashFlowChart({ days = 14 }: CashFlowChartProps) {
           [], // No balance adjustments for now
           days
         );
-        
+
         // Check if we got a valid forecast
         if (!Array.isArray(forecast) || forecast.length === 0) {
           throw new Error("Generated forecast is empty or invalid");
         }
-        
+
         // Update the last generation reference
         lastGenerationRef.current = {
           balanceId,
@@ -138,12 +135,10 @@ export function CashFlowChart({ days = 14 }: CashFlowChartProps) {
           billsCount: billsArray.length,
           timeframe
         };
-        
+
         // Set the forecast data in state
         setForecastData(forecast);
-        console.log(`Generated ${forecast.length} forecast items successfully`);
       } catch (error) {
-        console.error("Error generating cash flow forecast:", error);
         setError(error instanceof Error ? error.message : "Unable to generate forecast");
         // Provide default data to prevent rendering issues
         setForecastData([{

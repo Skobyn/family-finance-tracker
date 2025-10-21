@@ -46,7 +46,6 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Error exchanging public token:', error);
     return NextResponse.json(
       { error: 'Failed to exchange token', details: error.message },
       { status: 500 }

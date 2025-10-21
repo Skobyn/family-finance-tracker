@@ -65,28 +65,23 @@ export function BillsList() {
 
   const handleSubmit = async (values: any) => {
     try {
-      console.log("Attempting to save bill:", values);
       setIsSubmitting(true);
       const formattedValues = {
         ...values,
         dueDate: values.dueDate.toISOString(),
       };
-      console.log("Formatted bill values:", formattedValues);
 
       if (currentBill) {
-        console.log("Updating existing bill:", currentBill.id);
         await updateBill({
           id: currentBill.id,
           ...formattedValues,
         });
       } else {
-        console.log("Adding new bill");
-        const newBill = await addBill(formattedValues);
-        console.log("New bill created with ID:", newBill?.id);
+        await addBill(formattedValues);
       }
       setDialogOpen(false);
     } catch (error) {
-      console.error("Error saving bill:", error);
+      // TODO: Implement proper error handling/logging
     } finally {
       setIsSubmitting(false);
     }
@@ -104,7 +99,7 @@ export function BillsList() {
         setDeleteDialogOpen(false);
         setBillToDelete(null);
       } catch (error) {
-        console.error("Error deleting bill:", error);
+        // TODO: Implement proper error handling/logging
       }
     }
   };
@@ -121,7 +116,7 @@ export function BillsList() {
         setPayDialogOpen(false);
         setBillToPay(null);
       } catch (error) {
-        console.error("Error marking bill as paid:", error);
+        // TODO: Implement proper error handling/logging
       }
     }
   };

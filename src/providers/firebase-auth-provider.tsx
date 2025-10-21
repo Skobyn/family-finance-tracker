@@ -49,7 +49,6 @@ const AuthContext = createContext<AuthContextType>({
 const initializeUserCollections = async (firebaseUser: FirebaseUser) => {
   if (!db || !firebaseUser) return;
   
-  console.log("Initializing collections for user:", firebaseUser.uid);
   
   // Collections needed for the application
   const collections = [
@@ -67,7 +66,6 @@ const initializeUserCollections = async (firebaseUser: FirebaseUser) => {
     const profileSnap = await getDoc(profileRef);
     
     if (!profileSnap.exists()) {
-      console.log("Creating financial profile for user:", firebaseUser.uid);
       // Create default financial profile
       const defaultProfile = {
         userId: firebaseUser.uid,
@@ -78,14 +76,11 @@ const initializeUserCollections = async (firebaseUser: FirebaseUser) => {
       };
       
       await setDoc(profileRef, defaultProfile);
-      console.log("Financial profile created successfully");
     } else {
-      console.log("Financial profile already exists for user:", firebaseUser.uid);
     }
     
     return true;
   } catch (error) {
-    console.error("Error initializing user collections:", error);
     throw error;
   }
 };
@@ -97,7 +92,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Listen for auth state changes
   useEffect(() => {
-    console.log("Setting up auth state listener");
     
     // Function to load user profile from Firestore
     const loadUserProfile = async (firebaseUser: FirebaseUser) => {
@@ -134,7 +128,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         return mappedUser;
       } catch (error) {
-        console.error("Error loading user profile:", error);
         return mapFirebaseUser(firebaseUser);
       }
     };
@@ -147,7 +140,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (firebaseUser) {
             const userProfile = await loadUserProfile(firebaseUser);
             setUser(userProfile);
-            console.log("User authenticated:", userProfile.displayName);
             
             // Update auth cookie for middleware
             updateAuthCookie(firebaseUser);
@@ -155,7 +147,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             // Check if we need to redirect to dashboard
             const justSignedIn = sessionStorage.getItem('just_signed_in');
             if (justSignedIn === 'true') {
-              console.log("Just signed in flag detected, redirecting to dashboard");
               sessionStorage.removeItem('just_signed_in');
               sessionStorage.removeItem('redirect_loop_blocker'); // Clear any redirect loop blockers
               
@@ -166,13 +157,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             }
           } else {
             setUser(null);
-            console.log("No user authenticated");
             
             // Clear the auth cookie
             updateAuthCookie(null);
           }
         } catch (error) {
-          console.error("Auth error:", error);
           setUser(null);
           
           // Clear the auth cookie on error
@@ -204,7 +193,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       toast.success('Signed in successfully');
     } catch (error: any) {
-      console.error('Sign in error:', error);
       toast.error(error.message || 'Failed to sign in');
       throw error;
     } finally {
@@ -219,8 +207,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!auth) throw new Error('Firebase auth not initialized');
       
       // Add debug logging
-      console.log("Attempting Google sign-in...");
-      console.log("Auth domain:", process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN);
       
       const { GoogleAuthProvider, signInWithPopup, signInWithRedirect } = await import('firebase/auth');
       const provider = new GoogleAuthProvider();
@@ -230,11 +216,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       provider.addScope('profile');
       
       // Use PopUp for debugging (easier to see errors)
-      console.log("Opening Google auth popup...");
       
       try {
         const result = await signInWithPopup(auth, provider);
-        console.log("Google sign-in successful", result);
         const user = result.user;
         
         // Check if user document exists, create if not
@@ -258,8 +242,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         toast.success('Signed in with Google successfully');
       } catch (popupError: any) {
-        console.error("Popup error:", popupError);
-        console.log("Trying redirect method instead...");
         
         // If popup fails, try redirect method
         if (popupError.code === 'auth/popup-blocked' || popupError.code === 'auth/popup-closed-by-user') {
@@ -269,16 +251,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       }
     } catch (error: any) {
-      console.error('Google sign-in error:', error);
-      console.error('Error code:', error.code);
-      console.error('Error message:', error.message);
       
       // Handle specific Google sign-in errors
       if (error.code === 'auth/popup-closed-by-user') {
         toast.error('Sign-in cancelled. Please try again.');
       } else if (error.code === 'auth/unauthorized-domain') {
         toast.error('This domain is not authorized for authentication. Please contact support.');
-        console.error('Unauthorized domain. Make sure your domain is added to the Firebase Auth providers.');
       } else {
         toast.error(error.message || 'Failed to sign in with Google');
       }
@@ -314,7 +292,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       toast.success('Account created successfully');
     } catch (error: any) {
-      console.error('Sign up error:', error);
       toast.error(error.message || 'Failed to create account');
       throw error;
     } finally {
@@ -336,7 +313,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       toast.success('Signed out successfully');
     } catch (error: any) {
-      console.error('Sign out error:', error);
       toast.error(error.message || 'Failed to sign out');
       throw error;
     } finally {
@@ -372,7 +348,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       toast.success('Profile updated successfully');
     } catch (error: any) {
-      console.error('Profile update error:', error);
       toast.error(error.message || 'Failed to update profile');
       throw error;
     }

@@ -150,7 +150,6 @@ export function SetupGuide({ onClose, onSetBalance }: SetupGuideProps) {
       
       toast.success(`Balance updated to $${amount.toFixed(2)}`);
     } catch (error) {
-      console.error('Error updating balance:', error);
       toast.error("Failed to update balance. Please try again.");
     }
   };
@@ -172,7 +171,6 @@ export function SetupGuide({ onClose, onSetBalance }: SetupGuideProps) {
         notes: data.notes || '',
       };
       
-      console.log("Formatted income data for saving:", incomeData);
       await addIncome(incomeData);
       
       // Mark this step as completed
@@ -183,7 +181,6 @@ export function SetupGuide({ onClose, onSetBalance }: SetupGuideProps) {
       
       toast.success(`${data.name} has been added to your income sources`);
     } catch (error) {
-      console.error('Error adding income:', error);
       toast.error("Failed to add income. Please try again.");
     }
   };
@@ -214,7 +211,6 @@ export function SetupGuide({ onClose, onSetBalance }: SetupGuideProps) {
       
       toast.success(`${data.name} has been added to your bills`);
     } catch (error) {
-      console.error('Error adding expense as bill:', error);
       toast.error("Failed to add bill. Please try again.");
     }
   };

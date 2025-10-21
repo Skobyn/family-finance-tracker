@@ -33,9 +33,7 @@ export async function storePlaidToken(
       updated_at: new Date().toISOString()
     });
     
-    console.log('Plaid token stored successfully');
   } catch (error) {
-    console.error('Error storing Plaid token:', error);
     throw error;
   }
 }
@@ -62,7 +60,6 @@ export async function getPlaidToken(itemId: string): Promise<string | null> {
     
     return null;
   } catch (error) {
-    console.error('Error retrieving Plaid token:', error);
     throw error;
   }
 }
@@ -91,7 +88,6 @@ export async function getUserPlaidItems(userId: string) {
       ...doc.data()
     }));
   } catch (error) {
-    console.error('Error getting user Plaid items:', error);
     throw error;
   }
 }
@@ -167,9 +163,7 @@ export async function storePlaidAccounts(
       }
     }
     
-    console.log(`${accounts.length} accounts stored/updated successfully`);
   } catch (error) {
-    console.error('Error storing Plaid accounts:', error);
     throw error;
   }
 }
@@ -229,9 +223,7 @@ export async function storePlaidTransactions(
       }
     }
     
-    console.log(`${transactions.length} transactions processed`);
   } catch (error) {
-    console.error('Error storing Plaid transactions:', error);
     throw error;
   }
 } 

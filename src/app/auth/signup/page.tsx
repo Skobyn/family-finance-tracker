@@ -73,7 +73,6 @@ export default function SignUpPage() {
       // Explicitly navigate to dashboard
       router.push("/dashboard");
     } catch (error: any) {
-      console.error("Sign up error:", error);
       toast.error(error.message || "Failed to create account");
     } finally {
       setLoading(false);
@@ -87,7 +86,6 @@ export default function SignUpPage() {
       await signInWithGoogle();
       // The redirection will be handled by the auth provider
     } catch (error) {
-      console.error("Google sign-in error:", error);
       // Error already handled by the auth provider with toast
       setLoading(false);
     }

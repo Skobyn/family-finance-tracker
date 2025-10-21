@@ -44,13 +44,11 @@ export function useSupabaseAuth() {
         .single();
       
       if (error) {
-        console.error('Error fetching user profile:', error);
         return;
       }
       
       setUser(data);
     } catch (error) {
-      console.error('Error fetching user profile:', error);
     }
   }
 
@@ -62,7 +60,6 @@ export function useSupabaseAuth() {
       });
       if (error) throw error;
     } catch (error) {
-      console.error('Error signing in:', error);
       throw error;
     }
   }
@@ -93,7 +90,6 @@ export function useSupabaseAuth() {
         if (profileError) throw profileError;
       }
     } catch (error) {
-      console.error('Error signing up:', error);
       throw error;
     }
   }
@@ -103,7 +99,6 @@ export function useSupabaseAuth() {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
     } catch (error) {
-      console.error('Error signing out:', error);
       throw error;
     }
   }
@@ -141,7 +136,6 @@ export function useSupabaseData<T>(tableName: string) {
       setData(data as T[]);
     } catch (err: any) {
       setError(err);
-      console.error(`Error fetching data from ${tableName}:`, err);
     } finally {
       setLoading(false);
     }
@@ -160,7 +154,6 @@ export function useSupabaseData<T>(tableName: string) {
       fetchData();
       return data;
     } catch (err: any) {
-      console.error(`Error inserting into ${tableName}:`, err);
       throw err;
     }
   }
@@ -179,7 +172,6 @@ export function useSupabaseData<T>(tableName: string) {
       fetchData();
       return data;
     } catch (err: any) {
-      console.error(`Error updating in ${tableName}:`, err);
       throw err;
     }
   }
@@ -196,7 +188,6 @@ export function useSupabaseData<T>(tableName: string) {
       // Refresh data after delete
       fetchData();
     } catch (err: any) {
-      console.error(`Error deleting from ${tableName}:`, err);
       throw err;
     }
   }

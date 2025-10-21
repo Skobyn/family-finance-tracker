@@ -27,7 +27,6 @@ export async function GET(request: NextRequest) {
       new URL(`/connect-bank?oauth_state_id=${oauth_state_id}`, request.url)
     );
   } catch (error: any) {
-    console.error('Error in OAuth redirect:', error);
     return NextResponse.json(
       { error: 'Failed to process OAuth redirect', details: error.message },
       { status: 500 }

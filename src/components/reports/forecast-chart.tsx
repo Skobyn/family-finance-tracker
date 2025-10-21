@@ -17,7 +17,6 @@ export function ForecastChart({ baselineData, scenarioData, className, timeFrame
 
     // Safety check for extremely large datasets
     if (baselineData.length > 3000) {
-      console.warn(`ForecastChart received very large dataset (${baselineData.length} items), sampling data for performance`);
     }
 
     // Sort data by date

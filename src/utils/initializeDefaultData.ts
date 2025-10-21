@@ -32,7 +32,6 @@ export async function createHouseholdForUser(userId: string, name: string = 'My 
 
     return householdRef.id;
   } catch (error) {
-    console.error('Error creating household:', error);
     throw error;
   }
 }
@@ -98,7 +97,6 @@ export async function createDefaultCategories(householdId: string): Promise<void
       });
     }
   } catch (error) {
-    console.error('Error creating default categories:', error);
     throw error;
   }
 }
@@ -149,7 +147,6 @@ export async function createDefaultAccounts(householdId: string): Promise<void> 
       });
     }
   } catch (error) {
-    console.error('Error creating default accounts:', error);
     throw error;
   }
 }
@@ -170,9 +167,7 @@ export async function initializeUserData(userId: string, householdName?: string)
     // Create default accounts
     await createDefaultAccounts(householdId);
     
-    console.log('User data initialized successfully!');
   } catch (error) {
-    console.error('Error initializing user data:', error);
     throw error;
   }
 } 

@@ -20,7 +20,6 @@ export function ProtectedRoute({
   useEffect(() => {
     // Only handle redirection after loading is complete
     if (!loading && !user) {
-      console.log('User not authenticated, redirecting to sign-in');
       router.push('/auth/signin');
     }
   }, [user, loading, router]);

@@ -43,7 +43,6 @@ export default function UpdateBalanceForm({ onUpdate, initialBalance = 0 }: Upda
       await onUpdate(amount);
       form.reset({ balance: amount.toString() });
     } catch (error) {
-      console.error("Error updating balance:", error);
     } finally {
       setIsSubmitting(false);
     }

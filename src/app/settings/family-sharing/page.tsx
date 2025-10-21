@@ -245,7 +245,6 @@ export default function FamilySharingPage() {
 
   const handleInvite = () => {
     // Mock implementation - in a real app, this would send an invitation email
-    console.log("Inviting", inviteEmail, "with permission level", invitePermissionLevel);
 
     // Reset form
     setInviteEmail("");

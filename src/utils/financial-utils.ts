@@ -125,7 +125,6 @@ export function generateCashFlowForecast(
     const validExpenses = Array.isArray(expenses) ? expenses.slice(0, 100) : [];
     const validAdjustments = Array.isArray(balanceAdjustments) ? balanceAdjustments.slice(0, 50) : [];
     
-    console.log('Generating forecast with:', {
       balance: normalizedBalance,
       incomes: validIncomes.length,
       bills: validBills.length,
@@ -168,11 +167,9 @@ export function generateCashFlowForecast(
           
           // Performance safeguard: don't process too many items
           if (processed > 1000) {
-            console.warn(`Processing limit reached for ${itemType}. Some items may be omitted.`);
             break;
           }
         } catch (error) {
-          console.error(`Error processing ${itemType} item:`, error);
           // Skip this item and continue with others
         }
       }
@@ -376,11 +373,9 @@ export function generateCashFlowForecast(
       item.runningBalance = runningBalance;
     }
     
-    console.log(`Generated forecast with ${trimmedForecast.length} items`);
     return trimmedForecast;
     
   } catch (error) {
-    console.error('Critical error in generateCashFlowForecast:', error);
     // Return minimal valid forecast with the current balance
     return [{
       itemId: 'initial-balance',

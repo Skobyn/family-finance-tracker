@@ -15,7 +15,6 @@ const ensureUserDataInitialized = async (userId: string) => {
     // Can add more initialization checks here if needed
     return true;
   } catch (error) {
-    console.error('Error initializing user data:', error);
     return false;
   }
 };
@@ -41,15 +40,12 @@ export function useFinancialProfile() {
       // First ensure data is initialized
       await ensureUserDataInitialized(user.uid);
       
-      console.log(`Fetching financial profile for user ${user.uid}, retry: ${retryCount}`);
       const data = await FinancialService.getFinancialProfile(user.uid);
       
       if (data) {
-        console.log("Financial profile data received:", data);
         setProfile(data);
         setError(null);
       } else {
-        console.error("No financial profile data returned");
         setError(new Error("No financial profile data returned"));
         
         // Set a flag to retry instead of directly incrementing the counter
@@ -58,7 +54,6 @@ export function useFinancialProfile() {
         }
       }
     } catch (err: any) {
-      console.error('Error fetching financial profile:', err);
       setError(err);
       toast.error('Failed to load financial profile. Please refresh the page.');
       
@@ -75,7 +70,6 @@ export function useFinancialProfile() {
   // Separate useEffect for handling retries
   useEffect(() => {
     if (shouldRetry) {
-      console.log(`Scheduling retry for financial profile fetch (${retryCount + 1}/3)...`);
       const timer = setTimeout(() => {
         setRetryCount(prev => prev + 1);
         setShouldRetry(false);
@@ -83,7 +77,6 @@ export function useFinancialProfile() {
       }, 2000);
       
       return () => {
-        console.log("Clearing retry timer");
         clearTimeout(timer);
       };
     }
@@ -96,9 +89,7 @@ export function useFinancialProfile() {
     }
 
     try {
-      console.log(`Updating balance for user ${user.uid} to ${newBalance}`);
       const updatedProfile = await FinancialService.updateBalance(user.uid, newBalance, reason);
-      console.log("Balance updated successfully:", updatedProfile);
       
       // Don't set state if component is unmounted or if the profile hasn't changed
       if (profile && 
@@ -110,7 +101,6 @@ export function useFinancialProfile() {
       toast.success('Balance updated successfully');
       return updatedProfile;
     } catch (err: any) {
-      console.error('Error updating balance:', err);
       toast.error(err.message || 'Failed to update balance');
       throw err;
     }
@@ -123,7 +113,6 @@ export function useFinancialProfile() {
       try {
         if (mounted) await fetchProfile();
       } catch (err) {
-        console.error("Error in initial profile fetch:", err);
       }
     };
     
@@ -166,7 +155,6 @@ export function useIncomes() {
       setIncomes(data);
       setError(null);
     } catch (err: any) {
-      console.error('Error fetching incomes:', err);
       setError(err);
       toast.error('Failed to load income data');
     } finally {
@@ -192,13 +180,11 @@ export function useIncomes() {
         notes: income.notes || '',
       };
       
-      console.log('Formatted income object for saving:', formattedIncome);
       const newIncome = await FinancialService.addIncome(formattedIncome, user.uid);
       setIncomes(prev => [newIncome, ...prev]);
       toast.success('Income added successfully');
       return newIncome;
     } catch (err: any) {
-      console.error('Error adding income:', err);
       toast.error(err.message || 'Failed to add income');
       throw err;
     }
@@ -217,7 +203,6 @@ export function useIncomes() {
       ));
       toast.success('Income updated successfully');
     } catch (err: any) {
-      console.error('Error updating income:', err);
       toast.error(err.message || 'Failed to update income');
       throw err;
     }
@@ -234,7 +219,6 @@ export function useIncomes() {
       setIncomes(prev => prev.filter(item => item.id !== id));
       toast.success('Income deleted successfully');
     } catch (err: any) {
-      console.error('Error deleting income:', err);
       toast.error(err.message || 'Failed to delete income');
       throw err;
     }
@@ -247,7 +231,6 @@ export function useIncomes() {
       try {
         await fetchIncomes();
       } catch (err) {
-        console.error("Error in initial incomes fetch:", err);
       }
     };
     
@@ -278,7 +261,6 @@ export function useBills() {
 
   const fetchBills = useCallback(async () => {
     if (!user) {
-      console.log("fetchBills: No user logged in");
       setBills([]);
       setBillsLoading(false);
       return;
@@ -289,16 +271,13 @@ export function useBills() {
     setFetchError(null);
     
     try {
-      console.log(`Fetching bills for user: ${user.uid}`);
       const userBills = await FinancialService.getBills(user.uid);
       
       if (mounted) {
-        console.log(`Successfully fetched ${userBills.length} bills:`, userBills);
         setBills(userBills);
         setBillsLoading(false);
       }
     } catch (error) {
-      console.error("Error fetching bills:", error);
       if (mounted) {
         setFetchError("Failed to fetch bills. Please try again.");
         setBillsLoading(false);
@@ -324,9 +303,7 @@ export function useBills() {
         isRecurring: bill.frequency !== 'once'
       };
       
-      console.log('Adding bill with data:', fullBill);
       const newBill = await FinancialService.addBill(fullBill, user.uid);
-      console.log('Successfully added bill:', newBill);
       
       setBills(prev => [newBill, ...prev].sort((a, b) => 
         new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
@@ -334,7 +311,6 @@ export function useBills() {
       toast.success('Bill added successfully');
       return newBill;
     } catch (err: any) {
-      console.error('Error adding bill:', err);
       toast.error(err.message || 'Failed to add bill');
       throw err;
     }
@@ -355,7 +331,6 @@ export function useBills() {
       ));
       toast.success('Bill updated successfully');
     } catch (err: any) {
-      console.error('Error updating bill:', err);
       toast.error(err.message || 'Failed to update bill');
       throw err;
     }
@@ -372,7 +347,6 @@ export function useBills() {
       setBills(prev => prev.filter(item => item.id !== id));
       toast.success('Bill deleted successfully');
     } catch (err: any) {
-      console.error('Error deleting bill:', err);
       toast.error(err.message || 'Failed to delete bill');
       throw err;
     }
@@ -400,7 +374,6 @@ export function useBills() {
       // Refresh to get any new recurring bills
       fetchBills();
     } catch (err: any) {
-      console.error('Error marking bill as paid:', err);
       toast.error(err.message || 'Failed to mark bill as paid');
       throw err;
     }
@@ -413,7 +386,6 @@ export function useBills() {
       try {
         await fetchBills();
       } catch (err) {
-        console.error("Error in initial bills fetch:", err);
       }
     };
     
@@ -446,7 +418,6 @@ export function useExpenses() {
 
   const fetchExpenses = useCallback(async () => {
     if (!user) {
-      console.log("fetchExpenses: No user logged in");
       return;
     }
     
@@ -454,16 +425,13 @@ export function useExpenses() {
     setFetchError(null);
     
     try {
-      console.log(`Fetching expenses for user: ${user.uid}`);
       const userExpenses = await FinancialService.getExpenses(user.uid);
       
       if (mounted) {
         setExpenses(userExpenses);
         setExpensesLoading(false);
-        console.log(`Successfully fetched ${userExpenses.length} expenses`);
       }
     } catch (error) {
-      console.error("Error fetching expenses:", error);
       if (mounted) {
         setFetchError("Failed to fetch expenses. Please try again.");
         setExpensesLoading(false);
@@ -484,7 +452,6 @@ export function useExpenses() {
       toast.success('Expense added successfully');
       return newExpense;
     } catch (err: any) {
-      console.error('Error adding expense:', err);
       toast.error(err.message || 'Failed to add expense');
       throw err;
     }
@@ -503,7 +470,6 @@ export function useExpenses() {
       ));
       toast.success('Expense updated successfully');
     } catch (err: any) {
-      console.error('Error updating expense:', err);
       toast.error(err.message || 'Failed to update expense');
       throw err;
     }
@@ -520,7 +486,6 @@ export function useExpenses() {
       setExpenses(prev => prev.filter(item => item.id !== id));
       toast.success('Expense deleted successfully');
     } catch (err: any) {
-      console.error('Error deleting expense:', err);
       toast.error(err.message || 'Failed to delete expense');
       throw err;
     }
@@ -533,7 +498,6 @@ export function useExpenses() {
       try {
         await fetchExpenses();
       } catch (err) {
-        console.error("Error in initial expenses fetch:", err);
       }
     };
     
@@ -565,7 +529,6 @@ export function useBudgets() {
 
   const fetchBudgets = useCallback(async () => {
     if (!user) {
-      console.log("fetchBudgets: No user logged in");
       return;
     }
     
@@ -573,16 +536,13 @@ export function useBudgets() {
     setFetchError(null);
     
     try {
-      console.log(`Fetching budgets for user: ${user.uid}`);
       const userBudgets = await FinancialService.getBudgets(user.uid);
       
       if (mounted) {
         setBudgets(userBudgets);
         setBudgetsLoading(false);
-        console.log(`Successfully fetched ${userBudgets.length} budgets`);
       }
     } catch (error) {
-      console.error("Error fetching budgets:", error);
       if (mounted) {
         setFetchError("Failed to fetch budgets. Please try again.");
         setBudgetsLoading(false);
@@ -603,7 +563,6 @@ export function useBudgets() {
       toast.success('Budget added successfully');
       return newBudget;
     } catch (err: any) {
-      console.error('Error adding budget:', err);
       toast.error(err.message || 'Failed to add budget');
       throw err;
     }
@@ -622,7 +581,6 @@ export function useBudgets() {
       ));
       toast.success('Budget updated successfully');
     } catch (err: any) {
-      console.error('Error updating budget:', err);
       toast.error(err.message || 'Failed to update budget');
       throw err;
     }
@@ -639,7 +597,6 @@ export function useBudgets() {
       setBudgets(prev => prev.filter(item => item.id !== id));
       toast.success('Budget deleted successfully');
     } catch (err: any) {
-      console.error('Error deleting budget:', err);
       toast.error(err.message || 'Failed to delete budget');
       throw err;
     }
@@ -652,7 +609,6 @@ export function useBudgets() {
       try {
         await fetchBudgets();
       } catch (err) {
-        console.error("Error in initial budgets fetch:", err);
       }
     };
     
@@ -684,7 +640,6 @@ export function useGoals() {
 
   const fetchGoals = useCallback(async () => {
     if (!user) {
-      console.log("fetchGoals: No user logged in");
       return;
     }
     
@@ -692,16 +647,13 @@ export function useGoals() {
     setFetchError(null);
     
     try {
-      console.log(`Fetching goals for user: ${user.uid}`);
       const userGoals = await FinancialService.getGoals(user.uid);
       
       if (mounted) {
         setGoals(userGoals);
         setGoalsLoading(false);
-        console.log(`Successfully fetched ${userGoals.length} goals`);
       }
     } catch (error) {
-      console.error("Error fetching goals:", error);
       if (mounted) {
         setFetchError("Failed to fetch goals. Please try again.");
         setGoalsLoading(false);
@@ -724,7 +676,6 @@ export function useGoals() {
       toast.success('Goal added successfully');
       return newGoal;
     } catch (err: any) {
-      console.error('Error adding goal:', err);
       toast.error(err.message || 'Failed to add goal');
       throw err;
     }
@@ -745,7 +696,6 @@ export function useGoals() {
       ));
       toast.success('Goal updated successfully');
     } catch (err: any) {
-      console.error('Error updating goal:', err);
       toast.error(err.message || 'Failed to update goal');
       throw err;
     }
@@ -762,7 +712,6 @@ export function useGoals() {
       setGoals(prev => prev.filter(item => item.id !== id));
       toast.success('Goal deleted successfully');
     } catch (err: any) {
-      console.error('Error deleting goal:', err);
       toast.error(err.message || 'Failed to delete goal');
       throw err;
     }
@@ -775,7 +724,6 @@ export function useGoals() {
       try {
         await fetchGoals();
       } catch (err) {
-        console.error("Error in initial goals fetch:", err);
       }
     };
     
@@ -818,11 +766,9 @@ async function safeAsyncFetch<T>(fetchFn: () => Promise<T>, maxRetries = 1): Pro
       const timeout = 8000 + (retries * 2000);
       return await fetchWithTimeout(timeout) as T;
     } catch (err) {
-      console.error(`Fetch error (attempt ${retries + 1}/${maxRetries + 1}):`, err);
       retries++;
       
       if (retries > maxRetries) {
-        console.error('Max retries exceeded');
         return null;
       }
       
@@ -856,18 +802,15 @@ export function useFinancialData() {
   const refetchAll = useCallback(() => {
     // Don't refetch if already loading to prevent chain reactions
     if (isLoading) {
-      console.log("Skipping refetchAll because already loading");
       return;
     }
     
-    console.log("Refetching all financial data");
     
     // Use a more controlled approach with individual try/catch blocks
     const safeRefetch = async (name: string, refetchFn: Function) => {
       try {
         await refetchFn();
       } catch (err) {
-        console.error(`Error refetching ${name}:`, err);
       }
     };
     
