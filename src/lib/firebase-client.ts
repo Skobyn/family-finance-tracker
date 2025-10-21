@@ -2,17 +2,20 @@ import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { getAuth, Auth, User, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { getAnalytics, isSupported, Analytics } from 'firebase/analytics';
+import { validateFirebaseEnvironment } from './env-validation';
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
-};
+// Validate Firebase environment variables before initialization
+// This will throw descriptive errors if any required variables are missing
+let firebaseConfig;
+try {
+  const validatedConfig = validateFirebaseEnvironment();
+  firebaseConfig = validatedConfig;
+  console.log("Firebase environment variables validated successfully");
+} catch (error) {
+  console.error("Firebase environment validation failed:", error);
+  // Re-throw to prevent initialization with invalid config
+  throw error;
+}
 
 // Initialize Firebase in a way that's safe for both client and server
 let app: FirebaseApp;
