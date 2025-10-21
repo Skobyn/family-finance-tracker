@@ -3,8 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUser } from '@/lib/firebase-client';
 import { plaidClient } from '@/lib/plaid-client';
 import { getPlaidToken, storePlaidTransactions } from '@/lib/plaid-firebase';
+import { lenientRateLimiter } from '@/middleware/rate-limit';
 
 export async function POST(request: NextRequest) {
+  // Apply rate limiting
+  const rateLimitResult = await lenientRateLimiter(request);
+  if (rateLimitResult) return rateLimitResult;
+
   try {
     // Check if user is authenticated via Firebase
     const currentUser = await getCurrentUser();
@@ -17,20 +22,14 @@ export async function POST(request: NextRequest) {
     const { itemId, startDate, endDate } = body;
 
     if (!itemId) {
-      return NextResponse.json(
-        { error: 'Missing Plaid item ID' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Missing Plaid item ID' }, { status: 400 });
     }
 
     // Get the access token from Firestore
     const accessToken = await getPlaidToken(itemId);
-    
+
     if (!accessToken) {
-      return NextResponse.json(
-        { error: 'Access token not found for this item' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Access token not found for this item' }, { status: 404 });
     }
 
     // Set default date range if not provided
@@ -59,7 +58,6 @@ export async function POST(request: NextRequest) {
       transactions,
       accounts,
     });
-
   } catch (error: any) {
     return NextResponse.json(
       { error: 'Failed to fetch transactions', details: error.message },
