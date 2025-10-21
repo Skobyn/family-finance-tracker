@@ -42,7 +42,7 @@ export function usePlaidLinkFlow({ onSuccess, onExit }: UsePlaidLinkProps = {}) 
       }
 
       setLinkToken(data.linkToken);
-    } catch (_err) {
+    } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
       toast.error('Failed to connect to financial services');
     } finally {
@@ -96,7 +96,7 @@ export function usePlaidLinkFlow({ onSuccess, onExit }: UsePlaidLinkProps = {}) 
       }
 
       toast.success('Account successfully connected!');
-    } catch (_err) {
+    } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
       toast.error('Failed to link account');
     }

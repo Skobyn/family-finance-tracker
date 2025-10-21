@@ -202,7 +202,7 @@ export default function BudgetsPage() {
       
       // Hide setup guide if it was showing
       setShowSetupGuide(false);
-    } catch (_error) {
+    } catch (error) {
       toast.error("Failed to add budget");
     }
   };

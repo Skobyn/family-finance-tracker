@@ -1,6 +1,8 @@
-import React from 'react'
-import { render, screen } from '@/test-utils'
 import userEvent from '@testing-library/user-event'
+import React from 'react'
+
+import { render, screen } from '@/test-utils'
+
 import { Button } from '../button'
 
 describe('Button Component', () => {

@@ -198,7 +198,7 @@ export default function BillsPage() {
         toast.success(`${items.length} expenses saved successfully`);
       }
       setBulkEditorOpen(false);
-    } catch (_error) {
+    } catch (error) {
       toast.error("Failed to save all items. Please try again.");
     }
   };

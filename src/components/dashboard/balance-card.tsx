@@ -45,7 +45,7 @@ export function BalanceCard({ onUpdateBalance }: BalanceCardProps) {
       }
 
       setOpen(false);
-    } catch (_error) {
+    } catch (error) {
       // TODO: Implement proper error handling/logging
     } finally {
       setIsSubmitting(false);

@@ -152,7 +152,7 @@ export function SetupGuide({ onClose, onSetBalance }: SetupGuideProps) {
       setActiveStep("income");
       
       toast.success(`Balance updated to $${amount.toFixed(2)}`);
-    } catch (_error) {
+    } catch (error) {
       toast.error("Failed to update balance. Please try again.");
     }
   };
@@ -183,7 +183,7 @@ export function SetupGuide({ onClose, onSetBalance }: SetupGuideProps) {
       setActiveStep("expenses");
       
       toast.success(`${data.name} has been added to your income sources`);
-    } catch (_error) {
+    } catch (error) {
       toast.error("Failed to add income. Please try again.");
     }
   };
@@ -213,7 +213,7 @@ export function SetupGuide({ onClose, onSetBalance }: SetupGuideProps) {
       markStepComplete("expenses");
       
       toast.success(`${data.name} has been added to your bills`);
-    } catch (_error) {
+    } catch (error) {
       toast.error("Failed to add bill. Please try again.");
     }
   };

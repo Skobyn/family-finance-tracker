@@ -33,7 +33,7 @@ export const addBudget = async (budget: any, userId: string): Promise<any> => {
 
     const docRef = await addDoc(collection(db, `users/${userId}/budgets`), newBudget);
     return { id: docRef.id, ...newBudget };
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -58,7 +58,7 @@ export const updateBudget = async (budget: any & { id: string }, userId: string)
     };
 
     await updateDoc(budgetRef, updatedData);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -77,7 +77,7 @@ export const deleteBudget = async (id: string, userId: string): Promise<void> =>
     }
 
     await deleteDoc(budgetRef);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -94,7 +94,7 @@ export const getBudgets = async (userId: string): Promise<any[]> => {
 
     const querySnapshot = await getDocs(budgetsQuery);
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  } catch (_error) {
+  } catch (error) {
     // Return empty array if collection doesn't exist yet
     if ((error as any)?.code === 'resource-exhausted') {
       return [];

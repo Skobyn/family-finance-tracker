@@ -27,8 +27,8 @@ export function BillsCalendar({ bills, expenses, onBillClick, onExpenseClick }: 
   // Function to combine bills and expenses for a given day
   const getDayItems = (day: Date) => {
     const billsOnDay = bills.filter(bill => isSameDay(new Date(bill.dueDate), day));
-    const _expensesOnDay = expenses.filter(expense => isSameDay(new Date(expense.date), day));
-    
+    const expensesOnDay = expenses.filter(expense => isSameDay(new Date(expense.date), day));
+
     return {
       bills: billsOnDay,
       expenses: expensesOnDay,

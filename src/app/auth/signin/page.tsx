@@ -86,7 +86,7 @@ export default function SignInPage() {
       setLoading(true);
       await signInWithGoogle();
       // The redirection will be handled by the auth provider
-    } catch (_error) {
+    } catch (error) {
       // Error already handled by the auth provider with toast
       setLoading(false);
     }

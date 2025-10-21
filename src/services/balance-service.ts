@@ -31,7 +31,7 @@ export const getFinancialProfile = async (userId: string): Promise<FinancialProf
 
     await setDoc(docRef, defaultProfile);
     return defaultProfile;
-  } catch (_error) {
+  } catch (error) {
     // Return a default profile rather than throwing
     return {
       userId,
@@ -100,7 +100,7 @@ export const updateBalance = async (
     await addDoc(collection(db, `users/${userId}/balanceAdjustments`), adjustmentData);
 
     return updatedProfile;
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };

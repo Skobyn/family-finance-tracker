@@ -161,7 +161,7 @@ export function generateCashFlowForecast(
           if (processed > 1000) {
             break;
           }
-        } catch (_error) {
+        } catch (error) {
           // Skip this item and continue with others
         }
       }
@@ -342,7 +342,7 @@ export function generateCashFlowForecast(
     forecast.sort((a, b) => {
       try {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
-      } catch (_error) {
+      } catch (error) {
         return 0; // Default to equal if error parsing dates
       }
     });
@@ -367,7 +367,7 @@ export function generateCashFlowForecast(
     
     return trimmedForecast;
     
-  } catch (_error) {
+  } catch (error) {
     // Return minimal valid forecast with the current balance
     return [{
       itemId: 'initial-balance',

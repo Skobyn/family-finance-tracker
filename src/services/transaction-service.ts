@@ -39,7 +39,7 @@ export const addExpense = async (
     // Use user-specific path
     const docRef = await addDoc(collection(db, `users/${userId}/expenses`), newExpense);
     return { id: docRef.id, ...newExpense };
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -67,7 +67,7 @@ export const updateExpense = async (
     };
 
     await updateDoc(expenseRef, updatedData);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -86,7 +86,7 @@ export const deleteExpense = async (id: string, userId: string): Promise<void> =
     }
 
     await deleteDoc(expenseRef);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -130,7 +130,7 @@ export const getExpenses = async (userId: string): Promise<Expense[]> => {
 
       return fallbackResults;
     }
-  } catch (_error) {
+  } catch (error) {
 
     // Return empty array rather than throwing
     return [];
@@ -166,7 +166,7 @@ export const addExpenseRecord = async (
       id: docRef.id,
       ...newExpense
     };
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };

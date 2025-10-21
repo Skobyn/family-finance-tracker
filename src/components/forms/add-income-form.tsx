@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DollarSign } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -61,7 +62,7 @@ export default function AddIncomeForm({ onAddIncome }: AddIncomeFormProps) {
       
       await onAddIncome(formattedData);
       form.reset();
-    } catch (_error) {
+    } catch (error) {
     } finally {
       setIsSubmitting(false);
     }

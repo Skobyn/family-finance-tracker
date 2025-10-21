@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react";
 
 import { IncomeForm } from "@/components/forms/income-form";
 import {
@@ -32,7 +33,7 @@ export function AddIncomeDialog({
         date: values.date.toISOString(),
       });
       onOpenChange(false);
-    } catch (_error) {
+    } catch (error) {
     } finally {
       setIsSubmitting(false);
     }

@@ -88,7 +88,7 @@ export function useFirebaseAuth() {
               await updateProfile(authUser.uid, defaultProfile);
               setUserProfile(defaultProfile);
             }
-          } catch (_error) {
+          } catch (error) {
           }
         } else {
           setUser(null);
@@ -119,7 +119,7 @@ export function useFirebaseAuth() {
       const { signInWithEmailAndPassword } = await import('firebase/auth');
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       return userCredential.user;
-    } catch (_error) {
+    } catch (error) {
       throw error;
     }
   }
@@ -144,7 +144,7 @@ export function useFirebaseAuth() {
       });
       
       return user;
-    } catch (_error) {
+    } catch (error) {
       throw error;
     }
   }
@@ -173,7 +173,7 @@ export function useFirebaseAuth() {
           updated_at: new Date().toISOString()
         });
       }
-    } catch (_error) {
+    } catch (error) {
       throw error;
     }
   }
@@ -184,7 +184,7 @@ export function useFirebaseAuth() {
     try {
       const { signOut: firebaseSignOut } = await import('firebase/auth');
       await firebaseSignOut(auth);
-    } catch (_error) {
+    } catch (error) {
       throw error;
     }
   }

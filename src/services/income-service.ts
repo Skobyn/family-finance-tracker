@@ -41,7 +41,7 @@ export const addIncome = async (
     // Always use the user-specific path for new incomes
     const docRef = await addDoc(collection(db, `users/${userId}/incomes`), newIncome);
     return { id: docRef.id, ...newIncome };
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -69,7 +69,7 @@ export const updateIncome = async (
     };
 
     await updateDoc(incomeRef, updatedData);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -88,7 +88,7 @@ export const deleteIncome = async (id: string, userId: string): Promise<void> =>
     }
 
     await deleteDoc(incomeRef);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -132,7 +132,7 @@ export const getIncomes = async (userId: string): Promise<Income[]> => {
 
       return fallbackResults;
     }
-  } catch (_error) {
+  } catch (error) {
 
     // Return empty array rather than throwing
     return [];
@@ -174,7 +174,7 @@ export const addIncomeRecord = async (
       id: docRef.id,
       ...newIncome
     };
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };

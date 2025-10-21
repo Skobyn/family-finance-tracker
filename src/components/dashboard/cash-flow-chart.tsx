@@ -139,7 +139,7 @@ export function CashFlowChart({ days = 14 }: CashFlowChartProps) {
 
         // Set the forecast data in state
         setForecastData(forecast);
-      } catch (_error) {
+      } catch (error) {
         setError(error instanceof Error ? error.message : "Unable to generate forecast");
         // Provide default data to prevent rendering issues
         setForecastData([{

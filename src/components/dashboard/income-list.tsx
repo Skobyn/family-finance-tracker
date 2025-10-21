@@ -121,7 +121,7 @@ export function IncomeList({ incomes, onEdit, onDelete, loading, error }: Income
       } else {
         toast.error("Adding new income is not supported in this view");
       }
-    } catch (_error) {
+    } catch (error) {
       // TODO: Implement proper error handling/logging
     } finally {
       setIsSubmitting(false);

@@ -39,7 +39,7 @@ export const addGoal = async (
     // Use user-specific path
     const docRef = await addDoc(collection(db, `users/${userId}/goals`), newGoal);
     return { id: docRef.id, ...newGoal };
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -67,7 +67,7 @@ export const updateGoal = async (
     };
 
     await updateDoc(goalRef, updatedData);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -86,7 +86,7 @@ export const deleteGoal = async (id: string, userId: string): Promise<void> => {
     }
 
     await deleteDoc(goalRef);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -130,7 +130,7 @@ export const getGoals = async (userId: string): Promise<Goal[]> => {
 
       return fallbackResults;
     }
-  } catch (_error) {
+  } catch (error) {
 
     // Return empty array rather than throwing
     return [];

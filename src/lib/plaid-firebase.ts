@@ -34,7 +34,7 @@ export async function storePlaidToken(
       updated_at: new Date().toISOString()
     });
     
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 }
@@ -60,7 +60,7 @@ export async function getPlaidToken(itemId: string): Promise<string | null> {
     }
     
     return null;
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 }
@@ -88,7 +88,7 @@ export async function getUserPlaidItems(userId: string) {
       id: doc.id,
       ...doc.data()
     }));
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 }
@@ -164,7 +164,7 @@ export async function storePlaidAccounts(
       }
     }
     
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 }
@@ -224,7 +224,7 @@ export async function storePlaidTransactions(
       }
     }
     
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 } 

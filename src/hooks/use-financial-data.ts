@@ -15,7 +15,7 @@ const ensureUserDataInitialized = async (userId: string) => {
     
     // Can add more initialization checks here if needed
     return true;
-  } catch (_error) {
+  } catch (error) {
     return false;
   }
 };
@@ -278,7 +278,7 @@ export function useBills() {
         setBills(userBills);
         setBillsLoading(false);
       }
-    } catch (_error) {
+    } catch (error) {
       if (mounted) {
         setFetchError("Failed to fetch bills. Please try again.");
         setBillsLoading(false);
@@ -432,7 +432,7 @@ export function useExpenses() {
         setExpenses(userExpenses);
         setExpensesLoading(false);
       }
-    } catch (_error) {
+    } catch (error) {
       if (mounted) {
         setFetchError("Failed to fetch expenses. Please try again.");
         setExpensesLoading(false);
@@ -543,7 +543,7 @@ export function useBudgets() {
         setBudgets(userBudgets);
         setBudgetsLoading(false);
       }
-    } catch (_error) {
+    } catch (error) {
       if (mounted) {
         setFetchError("Failed to fetch budgets. Please try again.");
         setBudgetsLoading(false);
@@ -654,7 +654,7 @@ export function useGoals() {
         setGoals(userGoals);
         setGoalsLoading(false);
       }
-    } catch (_error) {
+    } catch (error) {
       if (mounted) {
         setFetchError("Failed to fetch goals. Please try again.");
         setGoalsLoading(false);

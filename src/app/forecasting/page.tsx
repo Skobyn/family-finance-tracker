@@ -270,7 +270,7 @@ export default function ForecastingPage() {
         expensesCount: expenses.length,
         forecastPeriod
       };
-    } catch (_error) {
+    } catch (error) {
       setForecastData([]);
       setScenarioForecast([]);
     }
@@ -390,7 +390,7 @@ export default function ForecastingPage() {
       
       setScenarioForecast(scenarioForecast);
       
-    } catch (_error) {
+    } catch (error) {
       setScenarioForecast([]);
     }
   }, [financialData.profileData, financialData.incomesData, financialData.billsData, financialData.expensesData, forecastPeriod, incomeAdjustment, expensesAdjustment, savingsAdjustment, unexpectedExpense, unexpectedExpenseDate]);
@@ -512,7 +512,7 @@ export default function ForecastingPage() {
       });
       
       return result;
-    } catch (_error) {
+    } catch (error) {
       return [];
     }
   };
@@ -543,7 +543,7 @@ export default function ForecastingPage() {
     
     try {
       generateScenarioForecast();
-    } catch (_error) {
+    } catch (error) {
       toast.error("Failed to apply scenario adjustments");
     }
   };
@@ -603,10 +603,10 @@ export default function ForecastingPage() {
     if (!includeOptionalExpenses) {
       // Exclude optional expenses (we'll assume all expenses with category 'Entertainment' or 'Personal' are optional)
       const optionalCategories = ['Entertainment', 'Personal', 'Dining', 'Shopping'];
-      const _optionalExpenses = forecastData
+      const optionalExpenses = forecastData
         .filter(item => item.type === 'expense' && optionalCategories.includes(item.category))
         .reduce((sum, item) => sum + Math.abs(item.amount), 0);
-      
+
       projectedExpenses -= optionalExpenses;
     }
     
@@ -686,7 +686,7 @@ export default function ForecastingPage() {
           <div className="flex items-center gap-2">
             <div className="flex items-center space-x-4 justify-end mb-2">
               <div className="text-sm text-muted-foreground">Timeframe:</div>
-              <SelectGroup className="flex space-x-1">
+              <div className="flex space-x-1">
                 <Button
                   variant={forecastPeriod === "1m" ? "default" : "outline"}
                   size="sm"
@@ -715,7 +715,7 @@ export default function ForecastingPage() {
                 >
                   1 Year
                 </Button>
-              </SelectGroup>
+              </div>
             </div>
             <Button variant="outline" className="gap-2">
               <Settings className="h-4 w-4" />

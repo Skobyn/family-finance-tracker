@@ -11,7 +11,7 @@ let firebaseConfig;
 try {
   const validatedConfig = validateFirebaseEnvironment();
   firebaseConfig = validatedConfig;
-} catch (_error) {
+} catch (error) {
   // Re-throw to prevent initialization with invalid config
   throw error;
 }
@@ -50,7 +50,7 @@ if (typeof window !== 'undefined') {
       .catch(() => {
         // Analytics initialization failed silently
       });
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 } else {
@@ -88,7 +88,7 @@ export const getUserProfile = async (userId: string) => {
       return userDoc.data();
     }
     return null;
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };

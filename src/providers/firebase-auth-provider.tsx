@@ -81,7 +81,7 @@ const initializeUserCollections = async (firebaseUser: FirebaseUser) => {
     }
     
     return true;
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -128,7 +128,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
         
         return mappedUser;
-      } catch (_error) {
+      } catch (error) {
         return mapFirebaseUser(firebaseUser);
       }
     };
@@ -162,7 +162,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             // Clear the auth cookie
             updateAuthCookie(null);
           }
-        } catch (_error) {
+        } catch (error) {
           setUser(null);
           
           // Clear the auth cookie on error

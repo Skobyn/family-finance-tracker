@@ -187,7 +187,7 @@ export function createValidator<T>(schema: ZodSchema<T>) {
       let body: unknown;
       try {
         body = await req.json();
-      } catch (_error) {
+      } catch (error) {
         return {
           error: true,
           response: NextResponse.json(
@@ -204,7 +204,7 @@ export function createValidator<T>(schema: ZodSchema<T>) {
         error: false,
         data: validatedData,
       };
-    } catch (_error) {
+    } catch (error) {
       if (error instanceof ZodError) {
         // Format Zod errors into a readable structure
         const formattedErrors = error.errors.map((err) => ({
@@ -293,7 +293,7 @@ export function validateQueryParams<T>(
       error: false,
       data: validatedData,
     };
-  } catch (_error) {
+  } catch (error) {
     if (error instanceof ZodError) {
       const formattedErrors = error.errors.map((err) => ({
         field: err.path.join('.'),

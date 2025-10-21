@@ -44,7 +44,7 @@ export default function UpdateBalanceForm({ onUpdate, initialBalance = 0 }: Upda
       const amount = parseFloat(data.balance);
       await onUpdate(amount);
       form.reset({ balance: amount.toString() });
-    } catch (_error) {
+    } catch (error) {
     } finally {
       setIsSubmitting(false);
     }

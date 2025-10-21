@@ -37,7 +37,7 @@ export async function initializeCollections(userId: string): Promise<void> {
       try {
         await setDoc(profileRef, defaultProfile, { merge: true });
         console.log("Financial profile initialized");
-      } catch (_error) {
+      } catch (error) {
         console.error("Error creating financial profile:", error);
         throw new Error(`Failed to create financial profile: ${error instanceof Error ? error.message : String(error)}`);
       }
@@ -66,7 +66,7 @@ export async function initializeCollections(userId: string): Promise<void> {
         }, { merge: true });
         console.log(`Initialized collection: ${col.name}`);
         results.push({ collection: col.name, success: true });
-      } catch (_error) {
+      } catch (error) {
         console.error(`Error initializing collection ${col.name}:`, error);
         results.push({ 
           collection: col.name, 
@@ -83,7 +83,7 @@ export async function initializeCollections(userId: string): Promise<void> {
     }
     
     console.log("All collections successfully initialized");
-  } catch (_error) {
+  } catch (error) {
     console.error("Error initializing collections:", error);
     throw error;
   }
@@ -100,7 +100,7 @@ export function getCurrentUserId(): string | null {
       const parsedUser = JSON.parse(authUser);
       return parsedUser.uid;
     }
-  } catch (_error) {
+  } catch (error) {
     console.error("Error getting current user ID:", error);
   }
   

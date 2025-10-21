@@ -32,7 +32,7 @@ export async function createHouseholdForUser(userId: string, name: string = 'My 
     });
 
     return householdRef.id;
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 }
@@ -97,7 +97,7 @@ export async function createDefaultCategories(householdId: string): Promise<void
         updated_at: Timestamp.now()
       });
     }
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 }
@@ -147,7 +147,7 @@ export async function createDefaultAccounts(householdId: string): Promise<void> 
         updated_at: Timestamp.now()
       });
     }
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 }
@@ -168,7 +168,7 @@ export async function initializeUserData(userId: string, householdName?: string)
     // Create default accounts
     await createDefaultAccounts(householdId);
     
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 } 

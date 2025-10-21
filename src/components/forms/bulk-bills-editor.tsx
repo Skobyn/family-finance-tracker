@@ -266,7 +266,7 @@ export function BulkBillsEditor({ type, onSave, onCancel, existingItems = [] }: 
           })));
           
           toast.success(`Imported ${csvData.length} ${type}`);
-        } catch (_error) {
+        } catch (error) {
           toast.error("Failed to parse CSV file. Please check the format.");
         }
       }

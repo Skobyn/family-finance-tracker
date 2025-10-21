@@ -39,7 +39,7 @@ export const addBill = async (
     // Use user-specific path
     const docRef = await addDoc(collection(db, `users/${userId}/bills`), newBill);
     return { id: docRef.id, ...newBill };
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -67,7 +67,7 @@ export const updateBill = async (
     };
 
     await updateDoc(billRef, updatedData);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -86,7 +86,7 @@ export const deleteBill = async (id: string, userId: string): Promise<void> => {
     }
 
     await deleteDoc(billRef);
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };
@@ -130,7 +130,7 @@ export const getBills = async (userId: string): Promise<Bill[]> => {
 
       return fallbackResults;
     }
-  } catch (_error) {
+  } catch (error) {
 
     // Return empty array rather than throwing
     return [];
@@ -191,7 +191,7 @@ export const markBillAsPaid = async (
         nextDueDate: nextDate.toISOString()
       });
     }
-  } catch (_error) {
+  } catch (error) {
     throw error;
   }
 };

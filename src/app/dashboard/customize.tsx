@@ -389,7 +389,7 @@ export function DashboardCustomize() {
 // Helper Select component for the dashboard customization
 function Select({ value, onValueChange, children }: {
   value: string;
-  _onValueChange: (value: string) => void;
+  onValueChange: (value: string) => void;
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);

@@ -32,16 +32,16 @@ export function DebugPanel({ userId }: DebugPanelProps) {
       
       toast.success("Collections initialized successfully! Refreshing...");
       setTimeout(() => window.location.reload(), 1500);
-    } catch (_error) {
-       
+    } catch (error) {
+
       // eslint-disable-next-line no-console
       console.error("Error initializing collections:", error);
-      
+
       setInitResult({
         success: false,
         message: `Failed to initialize collections: ${error instanceof Error ? error.message : String(error)}`
       });
-      
+
       toast.error("Failed to initialize collections");
     } finally {
       setIsInitializing(false);

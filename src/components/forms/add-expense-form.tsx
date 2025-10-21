@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreditCard } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -74,7 +75,7 @@ export default function AddExpenseForm({ onAddExpense }: AddExpenseFormProps) {
       
       await onAddExpense(formattedData);
       form.reset();
-    } catch (_error) {
+    } catch (error) {
     } finally {
       setIsSubmitting(false);
     }

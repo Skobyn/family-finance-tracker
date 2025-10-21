@@ -36,7 +36,7 @@ export function Header() {
   const handleSignOut = async () => {
     try {
       await signOut();
-    } catch (_error) {
+    } catch (error) {
     }
   };
 

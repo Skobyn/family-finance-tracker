@@ -81,7 +81,7 @@ export function BillsList() {
         await addBill(formattedValues);
       }
       setDialogOpen(false);
-    } catch (_error) {
+    } catch (error) {
       // TODO: Implement proper error handling/logging
     } finally {
       setIsSubmitting(false);
@@ -99,7 +99,7 @@ export function BillsList() {
         await deleteBill(billToDelete);
         setDeleteDialogOpen(false);
         setBillToDelete(null);
-      } catch (_error) {
+      } catch (error) {
         // TODO: Implement proper error handling/logging
       }
     }
@@ -116,7 +116,7 @@ export function BillsList() {
         await markBillAsPaid(billToPay);
         setPayDialogOpen(false);
         setBillToPay(null);
-      } catch (_error) {
+      } catch (error) {
         // TODO: Implement proper error handling/logging
       }
     }

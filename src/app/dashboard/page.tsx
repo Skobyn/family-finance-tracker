@@ -17,10 +17,8 @@ import { Button } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useFinancialProfile, useIncomes, useBills, useExpenses } from "@/hooks/use-financial-data";
 import { db } from "@/lib/firebase-client";
- from "@/lib/utils";
 import { useAuth } from "@/providers/firebase-auth-provider";
 import { FinancialProfile, Bill, Expense, Income } from "@/types/financial";
- from '@/utils/database-debug';
 
 function formatCashFlowEvents(bills: Bill[], expenses: Expense[], incomes: Income[]) {
   const events = [
@@ -175,7 +173,7 @@ export default function DashboardPage() {
         } catch (_err) {
         }
       }
-    } catch (_error) {
+    } catch (error) {
     }
   };
 
@@ -186,7 +184,7 @@ export default function DashboardPage() {
       toast.success(`Balance updated to $${amount.toFixed(2)}`);
       // Mark that setup has begun but don't close the guide
       // Allow the user to continue with the next steps
-    } catch (_error) {
+    } catch (error) {
       toast.error("Failed to update balance");
     }
   };

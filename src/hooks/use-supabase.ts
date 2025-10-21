@@ -49,7 +49,7 @@ export function useSupabaseAuth() {
       }
       
       setUser(data);
-    } catch (_error) {
+    } catch (error) {
     }
   }
 
@@ -60,7 +60,7 @@ export function useSupabaseAuth() {
         password,
       });
       if (error) throw error;
-    } catch (_error) {
+    } catch (error) {
       throw error;
     }
   }
@@ -90,7 +90,7 @@ export function useSupabaseAuth() {
         
         if (profileError) throw profileError;
       }
-    } catch (_error) {
+    } catch (error) {
       throw error;
     }
   }
@@ -99,7 +99,7 @@ export function useSupabaseAuth() {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-    } catch (_error) {
+    } catch (error) {
       throw error;
     }
   }
